@@ -9,6 +9,8 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+
 public class Server {
 
 	private boolean connected = false;
@@ -16,7 +18,6 @@ public class Server {
 	private BufferedReader inFromServer = null;
 	private DataOutputStream outToServer = null;
 	private Socket socket = null;
-	private Json json;
 	
 	public Server(String IP, int PORT, String NAME) {
 		connect(IP, PORT, NAME);
@@ -57,12 +58,14 @@ public class Server {
 	}
 	
 	public void initstart(String NAME) {
-		json = new Json();
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("message", "connect");
-		map.put("revision", "1");
-		map.put("name", NAME);
-		sendMessage(json.toServer(map));
+		//Kjører rett etter tilkobligen er godkjent
+		Map<String, String> connect = new HashMap<String, String>();
+		connect.put("message", "connect");
+		connect.put("revision", "1");
+		connect.put("name", "EpicBOT");
+		Gson gson = new Gson();
+		String json = gson.toJson(connect);
+		sendMessage(json);
 	}
 	
 	private void clientLoop() {
@@ -75,6 +78,10 @@ public class Server {
 				if(data != null) {
 					//Vi har motatt data fra server, la oss sjekke den ut!
 					System.out.println("Data motatt fra server: " + data);
+					
+					
+					
+					
 				}
 				Thread.sleep(100);
 			} catch (InterruptedException | IOException e) {
