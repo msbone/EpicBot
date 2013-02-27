@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Server {
 
@@ -62,7 +64,7 @@ public class Server {
 		Map<String, String> connect = new HashMap<String, String>();
 		connect.put("message", "connect");
 		connect.put("revision", "1");
-		connect.put("name", "EpicBOT");
+		connect.put("name", NAME);
 		Gson gson = new Gson();
 		String json = gson.toJson(connect);
 		sendMessage(json);
@@ -78,9 +80,11 @@ public class Server {
 				if(data != null) {
 					//Vi har motatt data fra server, la oss sjekke den ut!
 					System.out.println("Data motatt fra server: " + data);
+					Type type =  new TypeToken<Map<String, Object>>(){}.getType();
+					Gson gson = new Gson();
+					Map<String, String> map =  gson.fromJson(data, type);
 					
-					
-					
+					System.out.println(map.get("message"));
 					
 				}
 				Thread.sleep(100);
