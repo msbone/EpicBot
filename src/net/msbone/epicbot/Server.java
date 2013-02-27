@@ -70,6 +70,17 @@ public class Server {
 		sendMessage(json);
 	}
 	
+	public void loadout(String weapon, String weapon_sec) {
+		//Kjører rett etter tilkobligen er godkjent
+		Map<String, String> connect = new HashMap<String, String>();
+		connect.put("message", "loadout");
+		connect.put("primary-weapon", weapon);
+		connect.put("secondary-weapon", weapon_sec);
+		Gson gson = new Gson();
+		String json = gson.toJson(connect);
+		sendMessage(json);
+	}
+	
 	private void clientLoop() {
 		System.out.println("Client loop started");
 		initstart("EpicBot");
@@ -79,12 +90,44 @@ public class Server {
 				String data = inFromServer.readLine();
 				if(data != null) {
 					//Vi har motatt data fra server, la oss sjekke den ut!
-					System.out.println("Data motatt fra server: " + data);
 					Type type =  new TypeToken<Map<String, Object>>(){}.getType();
 					Gson gson = new Gson();
-					Map<String, String> map =  gson.fromJson(data, type);
+					Map<String, Object> map =  gson.fromJson(data, type);
 					
-					System.out.println(map.get("message"));
+					String message = null;
+					message = (String) map.get("message");
+					if(message.equals("connect")) {
+						System.out.println("Server svar!");
+						if((boolean) map.get("status")){
+						System.out.println("Vi er koblet til serveren, venter på att serveren er klar");
+						}
+						else {
+							System.out.println("Servere godtok ikke meldingen, her er noe rart!");
+						}
+					}
+					else if(message.equals("gamestate")) {
+						//Spiller runde :)
+						Double runde = (Double) map.get("turn");
+						if(runde == 0.0) {
+							//Før vi starter :) Gjør oss klar!
+							System.out.println("I am here!");
+							
+							//Sender melding om att vi er klar
+							loadout("laser","droid");
+						}
+						else {
+							System.out.println("Runde " + runde + "er startet");
+							
+						}
+					}
+					else if(message.equals("endturn")) {
+						System.out.println("Runden er ferdig");
+						
+					}
+					else {
+						//Unknown message!
+						System.out.println("Ukjent data motatt fra server " + data);
+					}
 					
 				}
 				Thread.sleep(100);
