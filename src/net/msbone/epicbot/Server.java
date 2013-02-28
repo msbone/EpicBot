@@ -81,6 +81,7 @@ public class Server {
 		sendMessage(json);
 	}
 	
+	
 	private void clientLoop() {
 		System.out.println("Client loop started");
 		initstart("EpicBot");
@@ -114,9 +115,13 @@ public class Server {
 							
 							//Sender melding om att vi er klar
 							loadout("laser","droid");
+							
+							//hent mapdata og bygg koordinatsystem
+							
 						}
 						else {
 							System.out.println("Runde " + runde + "er startet");
+							System.out.println(data);
 							
 						}
 					}
