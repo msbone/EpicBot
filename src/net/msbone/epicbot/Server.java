@@ -29,20 +29,20 @@ public class Server {
 	@SuppressWarnings("resource")
 	private void connect(String IP, int PORT, String NAME) {
 		if(connected) {
-			System.out.println("Du kan ikke koble til server fordi du allerede har en tilkoblig til den, start clienten på nytt for å koble til igjen");
+			System.out.println("Du kan ikke koble til server fordi du allerede har en tilkoblig til den, start clienten pï¿½ nytt for ï¿½ koble til igjen");
 		}
 		else {
-		System.out.println(NAME + " vill no prøve å koble til serveren: "+IP+":"+PORT);
+		System.out.println(NAME + " vill no prï¿½ve ï¿½ koble til serveren: "+IP+":"+PORT);
 			try {
 				Socket socket = new Socket(IP, PORT);
 				outToServer = new DataOutputStream(socket.getOutputStream());
 				inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				socket.setKeepAlive(true);
 			} catch (UnknownHostException e) {
-				System.out.println("Klarte ikke å koble til server");
+				System.out.println("Klarte ikke ï¿½ koble til server");
 				e.printStackTrace();
 			} catch (IOException e) {
-				System.out.println("Klarte ikke å koble til server");
+				System.out.println("Klarte ikke ï¿½ koble til server");
 				e.printStackTrace();
 			}
 				connected = true;
@@ -60,7 +60,7 @@ public class Server {
 	}
 	
 	public void initstart(String NAME) {
-		//Kjører rett etter tilkobligen er godkjent
+		//Kjï¿½rer rett etter tilkobligen er godkjent
 		Map<String, String> connect = new HashMap<String, String>();
 		connect.put("message", "connect");
 		connect.put("revision", "1");
@@ -71,7 +71,7 @@ public class Server {
 	}
 	
 	public void loadout(String weapon, String weapon_sec) {
-		//Kjører rett etter tilkobligen er godkjent
+		//Kjï¿½rer  nÃ¥r serveren er klar, venlger vÃ¥pen
 		Map<String, String> connect = new HashMap<String, String>();
 		connect.put("message", "loadout");
 		connect.put("primary-weapon", weapon);
@@ -99,7 +99,7 @@ public class Server {
 					if(message.equals("connect")) {
 						System.out.println("Server svar!");
 						if((boolean) map.get("status")){
-						System.out.println("Vi er koblet til serveren, venter på att serveren er klar");
+						System.out.println("Vi er koblet til serveren, venter pï¿½ att serveren er klar");
 						}
 						else {
 							System.out.println("Servere godtok ikke meldingen, her er noe rart!");
@@ -109,7 +109,7 @@ public class Server {
 						//Spiller runde :)
 						Double runde = (Double) map.get("turn");
 						if(runde == 0.0) {
-							//Før vi starter :) Gjør oss klar!
+							//Fï¿½r vi starter :) Gjï¿½r oss klar!
 							System.out.println("I am here!");
 							
 							//Sender melding om att vi er klar
