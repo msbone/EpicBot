@@ -120,7 +120,7 @@ public class Server {
 							ArrayList<ArrayList> lines = new ArrayList<ArrayList>();
 						 lines.addAll((Collection<ArrayList>) kartdata.get("data"));
 						 
-						Object[][] kart = new Object[16][16];
+						Object[][] kart = new Object[lines.size()][lines.size()];
 						 
 						      for(int j = 0; j < lines.size(); j += 1) {
 									ArrayList<ArrayList> line = new ArrayList<ArrayList>();
@@ -129,15 +129,90 @@ public class Server {
 										kart[j][k] = line.get(k);
 									}
 						       }
+						      
 						
+						    int grass = 0;
+						    int tom = 0;
+						    int explodium = 0;
+						    int rubidium = 0;
+						    int scrap = 0;
+						    int rock = 0;
+						    double mortar = 2;
+						    double droid = 2;
+						    double laser = 2;
+						    
+						   
+						      
+						    for(int c1 = 0; c1 < lines.size(); c1 += 1){
+						    	for(int c2 = 0; c2 < lines.size(); c2 += 1){
+						    		if(kart[c1][c2].equals("G")){grass += 1;}
+						    		if(kart[c1][c2].equals("V")){tom += 1;}
+						    		if(kart[c1][c2].equals("E")){explodium += 1;}
+						    		if(kart[c1][c2].equals("R")){rubidium += 1;}
+						    		if(kart[c1][c2].equals("C")){scrap += 1;}
+						    		if(kart[c1][c2].equals("O")){rock += 1;}
+						    	}
+						    }
+						    
+						    if((grass/rock) <=  15){
+						    	laser -= 1;
+						    	droid -= 0.5;
+						    }
+						    
+						    if((grass/tom) <= 15){
+						    	droid -= 0.5;
+						    }
+						    
+						    if(explodium <= rubidium || explodium < scrap){
+						    	mortar -= 1;
+						    }
+						    
+						    if(rubidium < explodium || rubidium < scrap){
+						    	laser -= 1;
+						    }
+						    
+						    if(scrap < explodium || scrap < rubidium){
+						    	droid -= 1;
+						    }
+						    
+						    double weapons[] = {mortar, droid, laser};
+						    double largest = weapons[0];
+						    double smallest = weapons[0];
+						    String primary_weapon = "";
+						    String secondary_weapon = "";
+						    
+						    for(int c3 = 0; c3 < weapons.length; c3 += 1){
+						    	if(weapons[c3] > largest){
+						    		largest = weapons[c3];
+						    		if(c3 == 0){primary_weapon = "mortar";}
+						    		if(c3 == 1){primary_weapon = "droid";}
+						    		if(c3 == 2){primary_weapon = "laser";}
+						    	}
+						    	if(weapons[c3] < smallest){
+						    		smallest = weapons[c3];
+						    	}
+						    	if(weapons[c3] > smallest && weapons[c3] < largest){
+						    		if(c3 == 0){secondary_weapon = "mortar";}
+						    		if(c3 == 1){secondary_weapon = "droid";}
+						    		if(c3 == 2){secondary_weapon = "laser";}
+						    	}
+						    }
+						    
+						    System.out.println("grass: " + grass);
+						    System.out.println("tom: " + tom);
+						    System.out.println("explodium: " + explodium);
+						    System.out.println("rubidium: " + rubidium);
+						    System.out.println("scrap: " + scrap);
+						    System.out.println("rock: " + rock);
+						    
 							//Sender melding om att vi er klar og velger våpen
-							loadout("laser","droid") ;
+							loadout(primary_weapon,secondary_weapon) ;
 							System.out.println(data);
 							
 						}
 						else {
 							System.out.println("Runde " + runde + "er startet");
-							System.out.println(data);
+							//System.out.println(data);
 						}
 					}
 					else if(message.equals("endturn")) {
@@ -146,7 +221,7 @@ public class Server {
 					}
 					else {
 						//Unknown message!
-						System.out.println("Ukjent data motatt fra server " + data);
+						//System.out.println("Ukjent data motatt fra server " + data);
 					}
 					
 				}
