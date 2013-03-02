@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,7 +73,7 @@ public class Server {
 	}
 	
 	public void loadout(String weapon, String weapon_sec) {
-		//Kjï¿½rer  nÃ¥r serveren er klar, venlger vÃ¥pen
+		//Kjï¿½rer  nÃ¥r serveren er klar, velger vÃ¥pen
 		Map<String, String> connect = new HashMap<String, String>();
 		connect.put("message", "loadout");
 		connect.put("primary-weapon", weapon);
@@ -82,8 +84,8 @@ public class Server {
 	}
 	
 	private void clientLoop() {
-		System.out.println("Client loop started");
-		initstart("EpicBot");
+		System.out.println("Client loop startet");
+		initstart("SmartBot");
 		while(connected) {
 			try {
 				//All the fun happens here!
@@ -99,7 +101,7 @@ public class Server {
 					if(message.equals("connect")) {
 						System.out.println("Server svar!");
 						if((boolean) map.get("status")){
-						System.out.println("Vi er koblet til serveren, venter pï¿½ att serveren er klar");
+						System.out.println("Vi er koblet til serveren, venter på att serveren er klar");
 						}
 						else {
 							System.out.println("Servere godtok ikke meldingen, her er noe rart!");
@@ -109,15 +111,33 @@ public class Server {
 						//Spiller runde :)
 						Double runde = (Double) map.get("turn");
 						if(runde == 0.0) {
-							//Fï¿½r vi starter :) Gjï¿½r oss klar!
-							System.out.println("I am here!");
+							//Før vi starter :) Gjør oss klar!
+							//Må lese kartet her!
 							
-							//Sender melding om att vi er klar
-							loadout("laser","droid");
+							Type maptype =  new TypeToken<Map<String, Object>>(){}.getType();
+							Map<String, Object> kartdata =  gson.fromJson(map.get("map").toString(), maptype);
+							
+							ArrayList<ArrayList> lines = new ArrayList<ArrayList>();
+						 lines.addAll((Collection<ArrayList>) kartdata.get("data"));
+						 
+						Object[][] kart = new Object[16][16];
+						 
+						      for(int j = 0; j < lines.size(); j += 1) {
+									ArrayList<ArrayList> line = new ArrayList<ArrayList>();
+									line.addAll((Collection<ArrayList>) lines.get(j));
+									for(int k = 0; k < lines.size(); k += 1) {
+										kart[j][k] = line.get(k);
+									}
+						       }
+						
+							//Sender melding om att vi er klar og velger våpen
+							loadout("laser","droid") ;
+							System.out.println(data);
+							
 						}
 						else {
 							System.out.println("Runde " + runde + "er startet");
-							
+							System.out.println(data);
 						}
 					}
 					else if(message.equals("endturn")) {

@@ -4,7 +4,7 @@ public class EpicBot {
 	
 	public static String IP = "127.0.0.1";
 	public static int PORT = 54321;
-	public static String name = "EpicBOT";
+	public static String name = "SmartBot";
 	public static Server server;
 	
 	public static void main(String[] args) {
