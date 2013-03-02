@@ -20,13 +20,14 @@ public class Server {
 	private boolean connected = false;
 	
 	private BufferedReader inFromServer = null;
-	private DataOutputStream outToServer = null;
+	private static DataOutputStream outToServer = null;
 	private Socket socket = null;
 	
 	public Server(String IP, int PORT, String NAME) {
 		connect(IP, PORT, NAME);
 		clientLoop();
 	}
+	
 	
 	@SuppressWarnings("resource")
 	private void connect(String IP, int PORT, String NAME) {
@@ -51,7 +52,7 @@ public class Server {
 		}
 	}
 	
-	public void sendMessage(String message) {
+	public static void sendMessage(String message) {
 		System.out.println("Melding sendt til server: " + message);
 		try {
 			outToServer.writeBytes(message + '\n');
@@ -130,7 +131,6 @@ public class Server {
 									}
 						       }
 						      
-						
 						    double grass = 0;
 						    double tom = 0;
 						    double explodium = 0;
@@ -225,7 +225,15 @@ public class Server {
 						}
 						else {
 							System.out.println("Runde " + runde + "er startet");
-							//System.out.println(data);
+							//Sjekke om det er min tur?
+							
+							Type playertype =  new TypeToken<Map<String, Object>>(){}.getType();
+							Map<String, Object> players = gson.fromJson(map.get("players").toString(), playertype);
+							
+							System.out.println(map.get("players").toString());
+							
+							//System.out.println(players.toString());
+							
 						}
 					}
 					else if(message.equals("endturn")) {
@@ -252,5 +260,6 @@ public class Server {
 	
 	public boolean isConnected() {
 		return connected;
-	}	
+	}
+	
 }
