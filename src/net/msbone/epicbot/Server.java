@@ -131,17 +131,15 @@ public class Server {
 						       }
 						      
 						
-						    int grass = 0;
-						    int tom = 0;
-						    int explodium = 0;
-						    int rubidium = 0;
-						    int scrap = 0;
-						    int rock = 0;
+						    double grass = 0;
+						    double tom = 0;
+						    double explodium = 0;
+						    double rubidium = 0;
+						    double scrap = 0;
+						    double rock = 0;
 						    double mortar = 2;
 						    double droid = 2;
 						    double laser = 2;
-						    
-						   
 						      
 						    for(int c1 = 0; c1 < lines.size(); c1 += 1){
 						    	for(int c2 = 0; c2 < lines.size(); c2 += 1){
@@ -154,12 +152,15 @@ public class Server {
 						    	}
 						    }
 						    
-						    if((grass/rock) <=  15){
+						    double grass_rock = grass/rock;
+						    double grass_tom = grass/tom;
+						    
+						    if((grass_rock) <=  15){
 						    	laser -= 1;
 						    	droid -= 0.5;
 						    }
 						    
-						    if((grass/tom) <= 15){
+						    if((grass_tom) <= 15){
 						    	droid -= 0.5;
 						    }
 						    
@@ -178,26 +179,38 @@ public class Server {
 						    double weapons[] = {mortar, droid, laser};
 						    double largest = weapons[0];
 						    double smallest = weapons[0];
-						    String primary_weapon = "";
-						    String secondary_weapon = "";
+						    String primary_weapon = "laser";
+						    String secondary_weapon = "mortar";
+						    int c3 = 0;
+						    int c4 = 0;
 						    
-						    for(int c3 = 0; c3 < weapons.length; c3 += 1){
+						    while(c3 <= 2){
 						    	if(weapons[c3] > largest){
 						    		largest = weapons[c3];
 						    		if(c3 == 0){primary_weapon = "mortar";}
 						    		if(c3 == 1){primary_weapon = "droid";}
 						    		if(c3 == 2){primary_weapon = "laser";}
 						    	}
-						    	if(weapons[c3] < smallest){
-						    		smallest = weapons[c3];
-						    	}
-						    	if(weapons[c3] > smallest && weapons[c3] < largest){
-						    		if(c3 == 0){secondary_weapon = "mortar";}
-						    		if(c3 == 1){secondary_weapon = "droid";}
-						    		if(c3 == 2){secondary_weapon = "laser";}
-						    	}
+						    c3 += 1;
 						    }
 						    
+						    while(c4 <= 2){
+						    	if(weapons[c4] < smallest){
+						    		smallest = weapons[c4];
+						    		System.out.println("smallest= " + smallest);
+						    	}
+						    	if(weapons[c4] > smallest && weapons[c4] < largest){
+						    			double middle_value = weapons[c4];
+						    			if(c4 == 0){secondary_weapon = "mortar";}
+							    		if(c4 == 1){secondary_weapon = "droid";}
+							    		if(c4 == 2){secondary_weapon = "laser";}
+							    		System.out.println("weapon= " + secondary_weapon);
+							    		System.out.println("middle_value= " + middle_value);
+						    	}
+						    c4 += 1;
+						    }
+						    
+						    System.out.println("c3= " + c3);
 						    System.out.println("grass: " + grass);
 						    System.out.println("tom: " + tom);
 						    System.out.println("explodium: " + explodium);
@@ -206,7 +219,7 @@ public class Server {
 						    System.out.println("rock: " + rock);
 						    
 							//Sender melding om att vi er klar og velger våpen
-							loadout(primary_weapon,secondary_weapon) ;
+							loadout(primary_weapon, secondary_weapon);
 							System.out.println(data);
 							
 						}
