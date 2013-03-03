@@ -19,9 +19,15 @@ public class Server {
 
 	private boolean connected = false;
 	
+	private ArrayList<ArrayList> players = new ArrayList<ArrayList>();
+	
+	
+	
 	private BufferedReader inFromServer = null;
 	private static DataOutputStream outToServer = null;
 	private Socket socket = null;
+	
+	
 	
 	public Server(String IP, int PORT, String NAME) {
 		connect(IP, PORT, NAME);
@@ -119,7 +125,13 @@ public class Server {
 										kart[j][k] = line.get(k);
 									}
 						       }
-						    
+						    //Sjekker hvor mange spillere som er med
+								
+						        players.clear();
+								players.addAll((Collection<ArrayList>) map.get("players"));
+						      
+								 System.out.println("Antall spillere " +players.size());
+								 
 							//Sender melding om att vi er klar og velger våpen
 							Loadout.loadout(kart, lines);
 							System.out.println(data);
@@ -128,14 +140,9 @@ public class Server {
 						else {
 							System.out.println("Runde " + runde + "er startet");
 							//Sjekke om det er min tur?
-							
-							Type playertype =  new TypeToken<Map<String, Object>>(){}.getType();
-							Map<String, Object> players = gson.fromJson(map.get("players").toString(), playertype);
-							
-							System.out.println(map.get("players").toString());
-							
-							//System.out.println(players.toString());
-							
+					        players.clear();
+							players.addAll((Collection<ArrayList>) map.get("players")); 
+							System.out.println(players.get(0));
 						}
 					}
 					else if(message.equals("endturn")) {
