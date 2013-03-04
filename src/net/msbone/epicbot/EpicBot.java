@@ -11,14 +11,14 @@ public class EpicBot {
 		System.out.println("--------------------------------------------------------------------------");
 		System.out.println(name+" started - - - - - - - - - - - - - - - - - - - - -  "+name+" started");
 		System.out.println("--------------------------------------------------------------------------");
-		System.out.println("This is a AI created by Ole Mathias for use on TG13");
+		System.out.println("This is a AI created by Ole Mathias and Johan-Henrik for use on TG13");
 		System.out.println("Lets beat all the other AI and WIN :)");
 		System.out.println("--------------------------------------------------------------------------");
 		System.out.println("This is version 1");
 		System.out.println("--------------------------------------------------------------------------");
 		System.out.println(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 		System.out.println("--------------------------------------------------------------------------");
-		System.out.println("- - - MSBONE MSBONE MSBONE MSBONE MSBONE MSBONE MSBONE MSBONE MSBONE - - -");
+		System.out.println("- - - NERDVANA NERDVANA NERDVANA NERDVANA NERDVANA NERDVANA NERDVAN  - - -");
 		System.out.println("--------------------------------------------------------------------------");
 		System.out.println(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 		System.out.println("--------------------------------------------------------------------------");
