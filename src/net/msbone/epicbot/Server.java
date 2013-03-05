@@ -192,6 +192,14 @@ public class Server {
 								int posJ = Integer.parseInt(spillerposJ);
 								int posK = Integer.parseInt(spillerposK);
 								
+								
+								
+								//Top-right = J - 1
+								//Bot-right = K + 1
+								//Top-left = K - 1
+								//Bot-left = J + 1
+								
+								//for(int move_count = 0; move_count < 3; move_count++){
 								//Top
 								int blockInfrontJ = posJ + 1;
 								int blockInfrontK = posK + 1;
@@ -201,38 +209,81 @@ public class Server {
 								int blockInbackK = posK - 1;
 								
 								//Left
-								int blockInleftTopK = posK;
-								int blockInleftTopJ = posK - 1;
+								int blockInleftTopK = posK - 1;
+								int blockInleftTopJ = posJ;
 								
 								int blockInleftBotK = posK + 1;
-								int blockInleftBotJ = posK;
+								int blockInleftBotJ = posJ;
 								
 								//Right
-								int blockInrightTopK = posK - 1;
-								int blockInrightTopJ = posK;
+								int blockInrightTopK = posK;
+								int blockInrightTopJ = posJ - 1;
 								
-								int blockInrightBotK = posK;
-								int blockInrightBotJ = posK + 1;
+								int blockInrightBotK = posK + 1;
+								int blockInrightBotJ = posJ;
+								
 								
 								
 								System.out.println("The player is standing on " + kart[posJ][posK] + "at" + posJ + ":" + posK);
 								Map<String, String> move = new HashMap<String, String>();
-								if(!kart[blockInfrontJ][blockInfrontK].equals("O") && !kart[blockInfrontJ][blockInfrontK].equals("V") && !kart[blockInfrontJ][blockInfrontK].equals("S")) {
+								if(walkable(blockInfrontJ, blockInfrontK, kart)) {
 									//Front / down
 									System.out.println("Moving to " + kart[blockInfrontJ][blockInfrontK] + " at " + blockInfrontJ + ":" + blockInfrontK);
 									move.put("message", "action");
 									move.put("type", "move");
-									move.put("direction", "down");	
+									move.put("direction", "down");
+									posK = blockInfrontK;
+									posJ = blockInfrontJ;
 								}
-								else if(!kart[blockInbackJ][blockInbackK].equals("O") && !kart[blockInbackJ][blockInbackK].equals("V") && !kart[blockInbackJ][blockInbackK].equals("S")) {
+								else if(walkable(blockInbackJ, blockInbackK, kart)) {
 									//Back / up
 									System.out.println("Moving to " + kart[blockInbackJ][blockInbackK] + " at " + blockInfrontJ + ":" + blockInfrontK);
 									move.put("message", "action");
 									move.put("type", "move");
-									move.put("direction", "up");	
+									move.put("direction", "up");
+									posK = blockInbackK;
+									posJ = blockInbackJ;
 								}
+								else if(walkable(blockInrightTopK, blockInrightTopJ, kart)) {
+									//TOP-RIGHT
+									System.out.println("Moving to " + kart[blockInrightTopK][blockInrightTopJ] + " at " + blockInrightTopK + ":" + blockInrightTopJ);
+									move.put("message", "action");
+									move.put("type", "move");
+									move.put("direction", "right-up");
+									posK = blockInrightTopK;
+									posJ = blockInrightTopJ;
+								}
+								else if(walkable(blockInrightBotK, blockInrightBotJ, kart)) {
+									//BOT-RIGHT
+									System.out.println("Moving to " + kart[blockInrightBotK][blockInrightBotJ] + " at " + blockInrightBotK + ":" + blockInrightBotJ);
+									move.put("message", "action");
+									move.put("type", "move");
+									move.put("direction", "right-down");
+									posK = blockInrightBotK;
+									posJ = blockInrightBotJ;
+								}
+								else if(walkable(blockInleftTopK, blockInleftTopJ, kart)) {
+									//TOP-LEFT
+									System.out.println("Moving to " + kart[blockInleftTopK][blockInleftTopJ] + " at " + blockInleftTopK + ":" + blockInleftTopJ);
+									move.put("message", "action");
+									move.put("type", "move");
+									move.put("direction", "left-up");	
+									posK = blockInleftTopK;
+									posJ = blockInleftTopJ;
+								}
+								else if(walkable(blockInleftBotK, blockInleftBotJ, kart)) {
+									//BOT-LEFT
+									System.out.println("Moving to " + kart[blockInleftBotK][blockInleftBotJ] + " at " + blockInleftBotK + ":" + blockInleftBotJ);
+									move.put("message", "action");
+									move.put("type", "move");
+									move.put("direction", "left-down");
+									posK = blockInleftBotK;
+									posJ = blockInleftBotJ;
+								}
+								
 									String json = gson.toJson(move);
 									sendMessage(json);
+								//}
 							}
 							System.out.println(spillernavn[1]);
 							System.out.println(spillerdata);
@@ -262,6 +313,22 @@ public class Server {
 	
 	public boolean isConnected() {
 		return connected;
+	}
+	
+	private boolean walkable(int j, int k, Object[][] kart){
+		int aSize = kart[0].length;
+		System.out.println("aSize = " + aSize);
+		if(j >= 0 && k >= 0 && j < aSize && k < aSize){
+			if(!kart[j][k].equals("O") && !kart[j][k].equals("V") && !kart[j][k].equals("S")){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
 	}
 	
 }
