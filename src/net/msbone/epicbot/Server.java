@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,8 +22,7 @@ public class Server {
 	private boolean connected = false;
 	
 	private ArrayList<ArrayList> players = new ArrayList<ArrayList>();
-	
-	
+	private ArrayList<ArrayList> players2 = new ArrayList<ArrayList>();
 	
 	private BufferedReader inFromServer = null;
 	private static DataOutputStream outToServer = null;
@@ -141,8 +142,19 @@ public class Server {
 							System.out.println("Runde " + runde + "er startet");
 							//Sjekke om det er min tur?
 					        players.clear();
-							players.addAll((Collection<ArrayList>) map.get("players")); 
-							System.out.println(players.get(0));
+					        players2.clear();
+							players.addAll((Collection<ArrayList>) map.get("players"));
+							Object spillerdata1 = players.get(0);
+							String spillerdata = spillerdata1.toString();
+							String[] spillerdata2 = spillerdata.split(",");
+							String spillerdata3 = spillerdata2[4];
+							String[] spillernavn = spillerdata3.split("=");
+							String currentplayer = spillernavn[1];
+							if(currentplayer.equals("SmartBot")) {
+								System.out.println("Min tur!");
+							}
+							System.out.println(spillernavn[1]);
+							System.out.println(spillerdata);
 						}
 					}
 					else if(message.equals("endturn")) {
@@ -151,7 +163,7 @@ public class Server {
 					}
 					else {
 						//Unknown message!
-						//System.out.println("Ukjent data motatt fra server " + data);
+						System.out.println("Ukjent data motatt fra server " + data);
 					}
 					
 				}

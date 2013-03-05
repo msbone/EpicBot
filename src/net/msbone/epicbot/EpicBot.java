@@ -27,5 +27,6 @@ public class EpicBot {
 		System.out.println("---------------------------------------------------");
 		System.out.println("--------------------------------------------------------------------------");
 		server = new Server(IP,PORT,name);
+		
 	}
 }
