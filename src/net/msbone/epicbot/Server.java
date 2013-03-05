@@ -229,13 +229,10 @@ public class Server {
 									System.out.println("Moving to " + kart[blockInbackJ][blockInbackK] + " at " + blockInfrontJ + ":" + blockInfrontK);
 									move.put("message", "action");
 									move.put("type", "move");
-									move.put("direction", "up");
-									
+									move.put("direction", "up");	
 								}
-								if(move.isEmpty()) {
 									String json = gson.toJson(move);
-									sendMessage(json);	
-								}
+									sendMessage(json);
 							}
 							System.out.println(spillernavn[1]);
 							System.out.println(spillerdata);
