@@ -88,6 +88,7 @@ public class Server {
 				//All the fun happens here!
 				String data = inFromServer.readLine();
 				if(data != null) {
+					System.out.println(data);
 					//Vi har motatt data fra server, la oss sjekke den ut!
 					Type type =  new TypeToken<Map<String, Object>>(){}.getType();
 					Gson gson = new Gson();
@@ -95,7 +96,13 @@ public class Server {
 					
 					String message = null;
 					message = (String) map.get("message");
-					if(message.equals("connect")) {
+					
+					if(message.isEmpty()) {
+						System.out.println("Vi dør!");
+						
+					}
+					
+					if(message.equals("connect") && connected == false) {
 						System.out.println("Server svar!");
 						if((boolean) map.get("status")){
 						System.out.println("Vi er koblet til serveren, venter på att serveren er klar");
@@ -139,6 +146,25 @@ public class Server {
 							
 						}
 						else {
+							//Må lese kartet her!
+							
+							Type maptype =  new TypeToken<Map<String, Object>>(){}.getType();
+							Map<String, Object> kartdata =  gson.fromJson(map.get("map").toString(), maptype);
+							
+							ArrayList<ArrayList> lines = new ArrayList<ArrayList>();
+						 lines.addAll((Collection<ArrayList>) kartdata.get("data"));
+						 
+						Object[][] kart = new Object[lines.size()][lines.size()];
+						 
+						      for(int j = 0; j < lines.size(); j += 1) {
+									ArrayList<ArrayList> line = new ArrayList<ArrayList>();
+									line.addAll((Collection<ArrayList>) lines.get(j));
+									for(int k = 0; k < lines.size(); k += 1) {
+										kart[j][k] = line.get(k);
+									}
+						       }
+							
+							
 							System.out.println("Runde " + runde + "er startet");
 							//Sjekke om det er min tur?
 					        players.clear();
@@ -152,6 +178,64 @@ public class Server {
 							String currentplayer = spillernavn[1];
 							if(currentplayer.equals("SmartBot")) {
 								System.out.println("Min tur!");
+								//La oss sjekke hvor vi kan flytte oss
+								String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
+								String[] spillerpos2 = spillerpos.split("=");
+								String spillerpo3 = spillerpos2[1];
+								System.out.println(spillerpo3);
+								System.out.println("Vår spiller er her:");
+								//Henter ut x/j og y/k 
+								String[] spillerpos4 = spillerpo3.split(",");
+								String spillerposJ = spillerpos4[0].replace(" ", "");
+								String spillerposK = spillerpos4[1].replace(" ", "");;
+								
+								int posJ = Integer.parseInt(spillerposJ);
+								int posK = Integer.parseInt(spillerposK);
+								
+								//Top
+								int blockInfrontJ = posJ + 1;
+								int blockInfrontK = posK + 1;
+								
+								//Bot
+								int blockInbackJ = posJ - 1;
+								int blockInbackK = posK - 1;
+								
+								//Left
+								int blockInleftTopK = posK;
+								int blockInleftTopJ = posK - 1;
+								
+								int blockInleftBotK = posK + 1;
+								int blockInleftBotJ = posK;
+								
+								//Right
+								int blockInrightTopK = posK - 1;
+								int blockInrightTopJ = posK;
+								
+								int blockInrightBotK = posK;
+								int blockInrightBotJ = posK + 1;
+								
+								
+								System.out.println("The player is standing on " + kart[posJ][posK] + "at" + posJ + ":" + posK);
+								Map<String, String> move = new HashMap<String, String>();
+								if(!kart[blockInfrontJ][blockInfrontK].equals("O") && !kart[blockInfrontJ][blockInfrontK].equals("V") && !kart[blockInfrontJ][blockInfrontK].equals("S")) {
+									//Front / down
+									System.out.println("Moving to " + kart[blockInfrontJ][blockInfrontK] + " at " + blockInfrontJ + ":" + blockInfrontK);
+									move.put("message", "action");
+									move.put("type", "move");
+									move.put("direction", "down");	
+								}
+								else if(!kart[blockInbackJ][blockInbackK].equals("O") && !kart[blockInbackJ][blockInbackK].equals("V") && !kart[blockInbackJ][blockInbackK].equals("S")) {
+									//Back / up
+									System.out.println("Moving to " + kart[blockInbackJ][blockInbackK] + " at " + blockInfrontJ + ":" + blockInfrontK);
+									move.put("message", "action");
+									move.put("type", "move");
+									move.put("direction", "up");
+									
+								}
+								if(move.isEmpty()) {
+									String json = gson.toJson(move);
+									sendMessage(json);	
+								}
 							}
 							System.out.println(spillernavn[1]);
 							System.out.println(spillerdata);
