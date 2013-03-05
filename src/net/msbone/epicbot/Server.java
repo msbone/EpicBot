@@ -199,7 +199,7 @@ public class Server {
 								//Top-left = K - 1
 								//Bot-left = J + 1
 								
-								//for(int move_count = 0; move_count < 3; move_count++){
+								for(int move_count = 0; move_count < 3; move_count++){
 								//Top
 								int blockInfrontJ = posJ + 1;
 								int blockInfrontK = posK + 1;
@@ -283,7 +283,7 @@ public class Server {
 								
 									String json = gson.toJson(move);
 									sendMessage(json);
-								//}
+								}
 							}
 							System.out.println(spillernavn[1]);
 							System.out.println(spillerdata);
