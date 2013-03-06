@@ -1,4 +1,4 @@
 EpicAI
 ======
 
-An EpicAI created for use on TG 13
+An EpicAI created for use on a dataparty in norway
