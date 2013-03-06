@@ -244,43 +244,49 @@ public class Server {
 									posK = blockInbackK;
 									posJ = blockInbackJ;
 								}
-								else if(walkable(blockInrightTopK, blockInrightTopJ, kart)) {
+								else if(walkable(blockInrightTopJ, blockInrightTopK, kart)) {
 									//TOP-RIGHT
-									System.out.println("Moving to " + kart[blockInrightTopK][blockInrightTopJ] + " at " + blockInrightTopK + ":" + blockInrightTopJ);
+									System.out.println("Moving to " + kart[blockInrightTopJ][blockInrightTopK] + " at " + blockInrightTopJ + ":" + blockInrightTopK);
 									move.put("message", "action");
 									move.put("type", "move");
 									move.put("direction", "right-up");
 									posK = blockInrightTopK;
 									posJ = blockInrightTopJ;
 								}
-								else if(walkable(blockInrightBotK, blockInrightBotJ, kart)) {
+								else if(walkable(blockInrightBotJ, blockInrightBotK, kart)) {
 									//BOT-RIGHT
-									System.out.println("Moving to " + kart[blockInrightBotK][blockInrightBotJ] + " at " + blockInrightBotK + ":" + blockInrightBotJ);
+									System.out.println("Moving to " + kart[blockInrightBotJ][blockInrightBotK] + " at " + blockInrightBotJ + ":" + blockInrightBotK);
 									move.put("message", "action");
 									move.put("type", "move");
 									move.put("direction", "right-down");
 									posK = blockInrightBotK;
 									posJ = blockInrightBotJ;
 								}
-								else if(walkable(blockInleftTopK, blockInleftTopJ, kart)) {
+								else if(walkable(blockInleftTopJ, blockInleftTopK, kart)) {
 									//TOP-LEFT
-									System.out.println("Moving to " + kart[blockInleftTopK][blockInleftTopJ] + " at " + blockInleftTopK + ":" + blockInleftTopJ);
+									System.out.println("Moving to " + kart[blockInleftTopJ][blockInleftTopK] + " at " + blockInleftTopJ + ":" + blockInleftTopK);
 									move.put("message", "action");
 									move.put("type", "move");
 									move.put("direction", "left-up");	
 									posK = blockInleftTopK;
 									posJ = blockInleftTopJ;
 								}
-								else if(walkable(blockInleftBotK, blockInleftBotJ, kart)) {
+								else if(walkable(blockInleftBotJ, blockInleftBotK, kart)) {
 									//BOT-LEFT
-									System.out.println("Moving to " + kart[blockInleftBotK][blockInleftBotJ] + " at " + blockInleftBotK + ":" + blockInleftBotJ);
+									System.out.println("Moving to " + kart[blockInleftBotJ][blockInleftBotK] + " at " + blockInleftBotJ + ":" + blockInleftBotK);
 									move.put("message", "action");
 									move.put("type", "move");
 									move.put("direction", "left-down");
 									posK = blockInleftBotK;
 									posJ = blockInleftBotJ;
 								}
-								
+								else{
+									move.put("message", "action");
+									move.put("type", "pass");
+									move.put("direction", "left-down");
+									posK = blockInleftBotK;
+									posJ = blockInleftBotJ;
+								}
 									String json = gson.toJson(move);
 									sendMessage(json);
 								}
