@@ -8,14 +8,14 @@ public class EpicBot {
 	public static Server server;
 	
 	public static void main(String[] args) {
-		System.out.println("TG 13 TG 13 TG 13 TG 13 TG 13 TG13 TG13 TG13 TG13 TG13 TG13 TG13 TG13 TG13");
+		System.out.println("TG 13 | TG 13 | TG 13 | TG 13 | TG 13 | TG13 | TG13 | TG13 | TG13  TG13 |");
 		System.out.println("-------------------------------------------------------------------------");
 		System.out.println(name+" started - - - - - - - - - - - - - - - - - - - -   "+name+" started");
 		System.out.println("-------------------------------------------------------------------------");
 		System.out.println("This is a AI created by Ole Mathias and Johan-Henrik for use on TG13");
 		System.out.println("Lets beat all the other AI and WIN :)");
 		System.out.println("-------------------------------------------------------------------------");
-		System.out.println("This is version 1");
+		System.out.println("This is version 0.1 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
 		System.out.println("-------------------------------------------------------------------------");
 		System.out.println(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
 		System.out.println("-------------------------------------------------------------------------");
@@ -24,7 +24,7 @@ public class EpicBot {
 		System.out.println(" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 		System.out.println("--------------------------------------------------------------------------");
 		System.out.println("SYSTEM READY TO FIGHT!");
-		System.out.println("---------------------");
+		System.out.println("------------------------");
 		System.out.println("---------------------------------------------------");
 		System.out.println("-------------------------------------------------------------------------");
 		server = new Server(IP,PORT,name);
