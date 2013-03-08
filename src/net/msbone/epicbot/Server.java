@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,7 +20,6 @@ public class Server {
 	private boolean connected = false;
 	
 	private ArrayList<ArrayList> players = new ArrayList<ArrayList>();
-	private ArrayList<ArrayList> players2 = new ArrayList<ArrayList>();
 	
 	private BufferedReader inFromServer = null;
 	private static DataOutputStream outToServer = null;
@@ -168,7 +165,6 @@ public class Server {
 							System.out.println("Runde " + runde + "er startet");
 							//Sjekke om det er min tur?
 					        players.clear();
-					        players2.clear();
 							players.addAll((Collection<ArrayList>) map.get("players"));
 							Object spillerdata1 = players.get(0);
 							String spillerdata = spillerdata1.toString();
@@ -305,7 +301,7 @@ public class Server {
 					}
 					
 				}
-				Thread.sleep(100);
+				Thread.sleep(500);
 			} catch (InterruptedException | IOException e) {
 				e.printStackTrace();
 				try {
