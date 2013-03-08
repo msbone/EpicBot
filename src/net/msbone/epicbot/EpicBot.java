@@ -8,6 +8,9 @@ public class EpicBot {
 	public static Server server;
 	
 	public static void main(String[] args) {
+		if(args[0] != null) {
+			name = args[0];
+		}
 		System.out.println("TG 13 | TG 13 | TG 13 | TG 13 | TG 13 | TG13 | TG13 | TG13 | TG13  TG13 |");
 		System.out.println("-------------------------------------------------------------------------");
 		System.out.println(name+" started - - - - - - - - - - - - - - - - - - - -   "+name+" started");

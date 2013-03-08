@@ -79,13 +79,12 @@ public class Server {
 	
 	private void clientLoop() {
 		System.out.println("Client loop startet");
-		initstart("SmartBot");
+		initstart(EpicBot.name);
 		while(connected) {
 			try {
 				//All the fun happens here!
 				String data = inFromServer.readLine();
 				if(data != null) {
-					System.out.println(data);
 					//Vi har motatt data fra server, la oss sjekke den ut!
 					Type type =  new TypeToken<Map<String, Object>>(){}.getType();
 					Gson gson = new Gson();
@@ -94,12 +93,12 @@ public class Server {
 					String message = null;
 					message = (String) map.get("message");
 					
-					if(message.isEmpty()) {
-						System.out.println("We die");
-						
+					if(message == null) {
+						System.out.println("Error from server");
+						System.out.println(data);
 					}
 					
-					if(message.equals("connect") && connected == false) {
+					else if(message.equals("connect") && connected == false) {
 						System.out.println("Server svar!");
 						if((boolean) map.get("status")){
 						System.out.println("We are connected to the server");
