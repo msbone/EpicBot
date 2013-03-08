@@ -36,20 +36,20 @@ public class Server {
 	@SuppressWarnings("resource")
 	private void connect(String IP, int PORT, String NAME) {
 		if(connected) {
-			System.out.println("Du kan ikke koble til server fordi du allerede har en tilkoblig til den, start clienten pï¿½ nytt for ï¿½ koble til igjen");
+			System.out.println("The client can not connect to the server. Try to restart the client/server");
 		}
 		else {
-		System.out.println(NAME + " vill no prï¿½ve ï¿½ koble til serveren: "+IP+":"+PORT);
+		System.out.println(NAME + " will try to join the server: "+IP+":"+PORT);
 			try {
 				Socket socket = new Socket(IP, PORT);
 				outToServer = new DataOutputStream(socket.getOutputStream());
 				inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				socket.setKeepAlive(true);
 			} catch (UnknownHostException e) {
-				System.out.println("Klarte ikke ï¿½ koble til server");
+				System.out.println("Can not connect to the server");
 				e.printStackTrace();
 			} catch (IOException e) {
-				System.out.println("Klarte ikke ï¿½ koble til server");
+				System.out.println("Can not connect to the server");
 				e.printStackTrace();
 			}
 				connected = true;
@@ -57,7 +57,7 @@ public class Server {
 	}
 	
 	public static void sendMessage(String message) {
-		System.out.println("Melding sendt til server: " + message);
+		System.out.println("Message sent to server: " + message);
 		try {
 			outToServer.writeBytes(message + '\n');
 			outToServer.flush();
@@ -95,17 +95,17 @@ public class Server {
 					message = (String) map.get("message");
 					
 					if(message.isEmpty()) {
-						System.out.println("Vi dør!");
+						System.out.println("We die");
 						
 					}
 					
 					if(message.equals("connect") && connected == false) {
 						System.out.println("Server svar!");
 						if((boolean) map.get("status")){
-						System.out.println("Vi er koblet til serveren, venter på att serveren er klar");
+						System.out.println("We are connected to the server");
 						}
 						else {
-							System.out.println("Servere godtok ikke meldingen, her er noe rart!");
+							System.out.println("The server did not accept us, something is wrong");
 						}
 					}
 					else if(message.equals("gamestate")) {
@@ -135,7 +135,7 @@ public class Server {
 						        players.clear();
 								players.addAll((Collection<ArrayList>) map.get("players"));
 						      
-								 System.out.println("Antall spillere " +players.size());
+								 System.out.println("Players: " +players.size());
 								 
 							//Sender melding om att vi er klar og velger våpen
 							Loadout.loadout(kart, lines);
@@ -162,7 +162,7 @@ public class Server {
 						       }
 							
 							
-							System.out.println("Runde " + runde + "er startet");
+							System.out.println("Rounde " + runde + " is started");
 							//Sjekke om det er min tur?
 					        players.clear();
 							players.addAll((Collection<ArrayList>) map.get("players"));
@@ -173,13 +173,12 @@ public class Server {
 							String[] spillernavn = spillerdata3.split("=");
 							String currentplayer = spillernavn[1];
 							if(currentplayer.equals("SmartBot")) {
-								System.out.println("Min tur!");
+								System.out.println("Lets move!");
 								//La oss sjekke hvor vi kan flytte oss
 								String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
 								String[] spillerpos2 = spillerpos.split("=");
 								String spillerpo3 = spillerpos2[1];
 								System.out.println(spillerpo3);
-								System.out.println("Vår spiller er her:");
 								//Henter ut x/j og y/k 
 								String[] spillerpos4 = spillerpo3.split(",");
 								String spillerposJ = spillerpos4[0].replace(" ", "");
@@ -220,7 +219,7 @@ public class Server {
 								
 								
 								
-								System.out.println("The player is standing on " + kart[posJ][posK] + "at" + posJ + ":" + posK);
+								System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
 								Map<String, String> move = new HashMap<String, String>();
 								if(walkable(blockInfrontJ, blockInfrontK, kart)) {
 									//Front / down
@@ -292,7 +291,7 @@ public class Server {
 						}
 					}
 					else if(message.equals("endturn")) {
-						System.out.println("Runden er ferdig");
+						System.out.println("Rounde is done");
 						
 					}
 					else {
