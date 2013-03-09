@@ -1,6 +1,5 @@
 package net.msbone.epicbot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +7,7 @@ import com.google.gson.Gson;
 
 public class Loadout{
 	
-	public static void loadout(Object[][] kart, ArrayList<ArrayList> lines) {
+	public static void loadout(Object[][] kart, int mapsize) {
 	
 	//Vi definerer noen variabler
 	double grass = 0;
@@ -22,8 +21,8 @@ public class Loadout{
     double laser = 2; //start veriden til laser
 
     //Vi teller opp antallet av forskjellige blokker
-    for(int c1 = 0; c1 < lines.size(); c1 += 1){
-    	for(int c2 = 0; c2 < lines.size(); c2 += 1){
+    for(int c1 = 0; c1 < mapsize; c1 += 1){
+    	for(int c2 = 0; c2 < mapsize; c2 += 1){
     		if(kart[c1][c2].equals("G")){grass += 1;}
     		if(kart[c1][c2].equals("V")){tom += 1;}
     		if(kart[c1][c2].equals("E")){explodium += 1;}

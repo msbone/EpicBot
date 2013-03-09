@@ -113,22 +113,6 @@ public class Server {
 						if(runde == 0.0) {
 							//Før vi starter :) Gjør oss klar!
 							//Må lese kartet her!
-							
-							Type maptype =  new TypeToken<Map<String, Object>>(){}.getType();
-							Map<String, Object> kartdata =  gson.fromJson(map.get("map").toString(), maptype);
-							
-							ArrayList<ArrayList> lines = new ArrayList<ArrayList>();
-						 lines.addAll((Collection<ArrayList>) kartdata.get("data"));
-						 
-						Object[][] kart = new Object[lines.size()][lines.size()];
-						 
-						      for(int j = 0; j < lines.size(); j += 1) {
-									ArrayList<ArrayList> line = new ArrayList<ArrayList>();
-									line.addAll((Collection<ArrayList>) lines.get(j));
-									for(int k = 0; k < lines.size(); k += 1) {
-										kart[j][k] = line.get(k);
-									}
-						       }
 						    //Sjekker hvor mange spillere som er med
 								
 						        players.clear();
@@ -137,29 +121,14 @@ public class Server {
 								 System.out.println("Players: " +players.size());
 								 
 							//Sender melding om att vi er klar og velger våpen
-							Loadout.loadout(kart, lines);
+							Loadout.loadout(Kartet.readmap(map), Kartet.mapSize());
 							System.out.println(data);
 							
 						}
 						else {
 							//Må lese kartet her!
 							
-							Type maptype =  new TypeToken<Map<String, Object>>(){}.getType();
-							Map<String, Object> kartdata =  gson.fromJson(map.get("map").toString(), maptype);
-							
-							ArrayList<ArrayList> lines = new ArrayList<ArrayList>();
-						 lines.addAll((Collection<ArrayList>) kartdata.get("data"));
-						 
-						Object[][] kart = new Object[lines.size()][lines.size()];
-						 
-						      for(int j = 0; j < lines.size(); j += 1) {
-									ArrayList<ArrayList> line = new ArrayList<ArrayList>();
-									line.addAll((Collection<ArrayList>) lines.get(j));
-									for(int k = 0; k < lines.size(); k += 1) {
-										kart[j][k] = line.get(k);
-									}
-						       }
-							
+							Object kart[][] = Kartet.readmap(map);
 							
 							System.out.println("Rounde " + runde + " is started");
 							//Sjekke om det er min tur?
@@ -171,7 +140,7 @@ public class Server {
 							String spillerdata3 = spillerdata2[4];
 							String[] spillernavn = spillerdata3.split("=");
 							String currentplayer = spillernavn[1];
-							if(currentplayer.equals("SmartBot")) {
+							if(currentplayer.equals(EpicBot.name)) {
 								System.out.println("Lets move!");
 								//La oss sjekke hvor vi kan flytte oss
 								String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
