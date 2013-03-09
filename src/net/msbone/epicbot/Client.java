@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -123,107 +124,27 @@ public class Client {
 							System.out.println("Rounde " + runde + " is started");
 							//Sjekke om det er min tur?
 							if(Players.isMe(map)) {
-								System.out.println("Lets move!");
-								//La oss sjekke hvor vi kan flytte oss
-								
 								int posJ = Players.myPosJ(map);
 								int posK = Players.myPosK(map);
 								
-								//Top-right = J - 1
-								//Bot-right = K + 1
-								//Top-left = K - 1
-								//Bot-left = J + 1
+								System.out.println("Lets move!");
 								
+								Random generator = new Random();
+								Movement movement = new Movement();
+								//La oss sjekke hvor vi kan flytte oss
 								for(int move_count = 0; move_count < 3; move_count++){
-								//Top
-								int blockInfrontJ = posJ + 1;
-								int blockInfrontK = posK + 1;
-								
-								//Bot
-								int blockInbackJ = posJ - 1;
-								int blockInbackK = posK - 1;
-								
-								//Left
-								int blockInleftTopK = posK - 1;
-								int blockInleftTopJ = posJ;
-								
-								int blockInleftBotK = posK + 1;
-								int blockInleftBotJ = posJ;
-								
-								//Right
-								int blockInrightTopK = posK;
-								int blockInrightTopJ = posJ - 1;
-								
-								int blockInrightBotK = posK + 1;
-								int blockInrightBotJ = posJ;
-								
-								
-								
-								System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-								Map<String, String> move = new HashMap<String, String>();
-								if(walkable(blockInfrontJ, blockInfrontK, kart)) {
-									//Front / down
-									System.out.println("Moving to " + kart[blockInfrontJ][blockInfrontK] + " at " + blockInfrontJ + ":" + blockInfrontK);
-									move.put("message", "action");
-									move.put("type", "move");
-									move.put("direction", "down");
-									posK = blockInfrontK;
-									posJ = blockInfrontJ;
-								}
-								else if(walkable(blockInbackJ, blockInbackK, kart)) {
-									//Back / up
-									System.out.println("Moving to " + kart[blockInbackJ][blockInbackK] + " at " + blockInfrontJ + ":" + blockInfrontK);
-									move.put("message", "action");
-									move.put("type", "move");
-									move.put("direction", "up");
-									posK = blockInbackK;
-									posJ = blockInbackJ;
-								}
-								else if(walkable(blockInrightTopJ, blockInrightTopK, kart)) {
-									//TOP-RIGHT
-									System.out.println("Moving to " + kart[blockInrightTopJ][blockInrightTopK] + " at " + blockInrightTopJ + ":" + blockInrightTopK);
-									move.put("message", "action");
-									move.put("type", "move");
-									move.put("direction", "right-up");
-									posK = blockInrightTopK;
-									posJ = blockInrightTopJ;
-								}
-								else if(walkable(blockInrightBotJ, blockInrightBotK, kart)) {
-									//BOT-RIGHT
-									System.out.println("Moving to " + kart[blockInrightBotJ][blockInrightBotK] + " at " + blockInrightBotJ + ":" + blockInrightBotK);
-									move.put("message", "action");
-									move.put("type", "move");
-									move.put("direction", "right-down");
-									posK = blockInrightBotK;
-									posJ = blockInrightBotJ;
-								}
-								else if(walkable(blockInleftTopJ, blockInleftTopK, kart)) {
-									//TOP-LEFT
-									System.out.println("Moving to " + kart[blockInleftTopJ][blockInleftTopK] + " at " + blockInleftTopJ + ":" + blockInleftTopK);
-									move.put("message", "action");
-									move.put("type", "move");
-									move.put("direction", "left-up");	
-									posK = blockInleftTopK;
-									posJ = blockInleftTopJ;
-								}
-								else if(walkable(blockInleftBotJ, blockInleftBotK, kart)) {
-									//BOT-LEFT
-									System.out.println("Moving to " + kart[blockInleftBotJ][blockInleftBotK] + " at " + blockInleftBotJ + ":" + blockInleftBotK);
-									move.put("message", "action");
-									move.put("type", "move");
-									move.put("direction", "left-down");
-									posK = blockInleftBotK;
-									posJ = blockInleftBotJ;
-								}
-								else{
-									move.put("message", "action");
-									move.put("type", "pass");
-									move.put("direction", "left-down");
-									posK = blockInleftBotK;
-									posJ = blockInleftBotJ;
-								}
-									String json = gson.toJson(move);
-									sendMessage(json);
+									//La oss sjekke hvilken valg vi har :)
+									boolean didmove = false;
+									while(didmove == false) {
+									int num = generator.nextInt(6);
+									if(num == 1) {didmove = movement.canMoveTop(true, posJ, posK, kart);}
+									else if(num == 2) {didmove = movement.canMoveBot(true, posJ, posK, kart);} 
+									else if(num == 3) {didmove = movement.canMoveLeftTop(true, posJ, posK, kart);} 
+									else if(num == 4) {didmove = movement.canMoveLeftBot(true, posJ, posK, kart);} 
+									else if(num == 5) {didmove = movement.canMoveRightTop(true, posJ, posK, kart);} 
+									else if(num == 6) {didmove = movement.canMoveRightBot(true, posJ, posK, kart);} 
+									else{System.out.println(num); didmove = false;}
+									}
 								}
 							}
 						}
@@ -250,20 +171,4 @@ public class Client {
 		}
 	}
 		
-	private boolean walkable(int j, int k, Object[][] kart){
-		int aSize = kart[0].length;
-		System.out.println("aSize = " + aSize);
-		if(j >= 0 && k >= 0 && j < aSize && k < aSize){
-			if(!kart[j][k].equals("O") && !kart[j][k].equals("V") && !kart[j][k].equals("S")){
-				return true;
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
-	}
-	
 }

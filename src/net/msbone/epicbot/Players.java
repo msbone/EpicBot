@@ -16,6 +16,7 @@ public class Players {
 		String[] spillernavn = spillerdata3.split("=");
 		String currentplayer = spillernavn[1];
 		if(currentplayer.equals(EpicBot.name)) {
+			System.out.println(currentplayer);
 			return true;
 		}
 		return false;
