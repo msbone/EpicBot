@@ -7,15 +7,13 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class Server {
+public class Client {
 
 	private boolean connected = false;
 	
@@ -25,7 +23,7 @@ public class Server {
 	
 	
 	
-	public Server(String IP, int PORT, String NAME) {
+	public Client(String IP, int PORT, String NAME) {
 		connect(IP, PORT, NAME);
 		clientLoop();
 	}
@@ -65,7 +63,6 @@ public class Server {
 	}
 	
 	public void initstart(String NAME) {
-		//Kj�rer rett etter tilkobligen er godkjent
 		Map<String, String> connect = new HashMap<String, String>();
 		connect.put("message", "connect");
 		connect.put("revision", "1");
@@ -252,11 +249,7 @@ public class Server {
 			}
 		}
 	}
-	
-	public boolean isConnected() {
-		return connected;
-	}
-	
+		
 	private boolean walkable(int j, int k, Object[][] kart){
 		int aSize = kart[0].length;
 		System.out.println("aSize = " + aSize);
