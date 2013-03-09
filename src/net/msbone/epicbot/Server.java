@@ -19,8 +19,6 @@ public class Server {
 
 	private boolean connected = false;
 	
-	private ArrayList<ArrayList> players = new ArrayList<ArrayList>();
-	
 	private BufferedReader inFromServer = null;
 	private static DataOutputStream outToServer = null;
 	private Socket socket = null;
@@ -114,11 +112,6 @@ public class Server {
 							//Før vi starter :) Gjør oss klar!
 							//Må lese kartet her!
 						    //Sjekker hvor mange spillere som er med
-								
-						        players.clear();
-								players.addAll((Collection<ArrayList>) map.get("players"));
-						      
-								 System.out.println("Players: " +players.size());
 								 
 							//Sender melding om att vi er klar og velger våpen
 							Loadout.loadout(Kartet.readmap(map), Kartet.mapSize());
@@ -132,30 +125,12 @@ public class Server {
 							
 							System.out.println("Rounde " + runde + " is started");
 							//Sjekke om det er min tur?
-					        players.clear();
-							players.addAll((Collection<ArrayList>) map.get("players"));
-							Object spillerdata1 = players.get(0);
-							String spillerdata = spillerdata1.toString();
-							String[] spillerdata2 = spillerdata.split(",");
-							String spillerdata3 = spillerdata2[4];
-							String[] spillernavn = spillerdata3.split("=");
-							String currentplayer = spillernavn[1];
-							if(currentplayer.equals(EpicBot.name)) {
+							if(Players.isMe(map)) {
 								System.out.println("Lets move!");
 								//La oss sjekke hvor vi kan flytte oss
-								String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
-								String[] spillerpos2 = spillerpos.split("=");
-								String spillerpo3 = spillerpos2[1];
-								System.out.println(spillerpo3);
-								//Henter ut x/j og y/k 
-								String[] spillerpos4 = spillerpo3.split(",");
-								String spillerposJ = spillerpos4[0].replace(" ", "");
-								String spillerposK = spillerpos4[1].replace(" ", "");;
 								
-								int posJ = Integer.parseInt(spillerposJ);
-								int posK = Integer.parseInt(spillerposK);
-								
-								
+								int posJ = Players.myPosJ(map);
+								int posK = Players.myPosK(map);
 								
 								//Top-right = J - 1
 								//Bot-right = K + 1
@@ -254,8 +229,6 @@ public class Server {
 									sendMessage(json);
 								}
 							}
-							System.out.println(spillernavn[1]);
-							System.out.println(spillerdata);
 						}
 					}
 					else if(message.equals("endturn")) {
