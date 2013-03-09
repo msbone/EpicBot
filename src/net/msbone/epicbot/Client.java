@@ -145,6 +145,7 @@ public class Client {
 									else if(num == 6) {didmove = movement.canMoveRightBot(true, posJ, posK, kart);} 
 									else{System.out.println(num); didmove = false;}
 									}
+									Thread.sleep(10);
 								}
 							}
 						}
