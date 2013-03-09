@@ -159,7 +159,7 @@ public class Client {
 					}
 					
 				}
-				Thread.sleep(500);
+				Thread.sleep(200);
 			} catch (InterruptedException | IOException e) {
 				e.printStackTrace();
 				try {
