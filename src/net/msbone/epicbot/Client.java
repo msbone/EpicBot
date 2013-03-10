@@ -127,8 +127,12 @@ public class Client {
 								int posJ = Players.myPosJ(map);
 								int posK = Players.myPosK(map);
 								
-								System.out.println("Lets move!");
 								
+								//La oss sjekke om vi kan angripe nokke :)
+								System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "laser", kart));
+								
+								
+								System.out.println("Lets move!");
 								Random generator = new Random();
 								Movement movement = new Movement();
 								//La oss sjekke hvor vi kan flytte oss

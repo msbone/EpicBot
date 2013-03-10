@@ -107,7 +107,8 @@ public class Loadout{
 		//Vi sender loadout til serveren
 		Map<String, String> connect = new HashMap<String, String>();
 		connect.put("message", "loadout");
-		connect.put("primary-weapon", primary_weapon);
+		connect.put("primary-weapon", "laser");
+		//connect.put("primary-weapon", primary_weapon);
 		connect.put("secondary-weapon", secondary_weapon);
 		Gson gson = new Gson();
 		String json = gson.toJson(connect);

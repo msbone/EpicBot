@@ -52,7 +52,7 @@ return 0;
 	}
 	
 	public static int myPosK(Map map) {
-		ArrayList<ArrayList> players = new ArrayList<ArrayList>();
+ArrayList<ArrayList> players = new ArrayList<ArrayList>();
 		 players.clear();
 players.addAll((Collection<ArrayList>) map.get("players"));
 Object spillerdata1 = players.get(0);
@@ -80,5 +80,120 @@ if(currentplayer.equals(EpicBot.name)) {
 return 0;
 	}
 	
+	public static int closestPlayerK(Map map, int posJ, int posK)  {
+		String closestName = null;
+		int closestJ = 0;
+		int closestK = 0;
+		int closest = 1000;
+		
+		ArrayList<ArrayList> players = new ArrayList<ArrayList>();
+		 players.clear();
+players.addAll((Collection<ArrayList>) map.get("players"));
+int number_players = players.size();
+for(int x = 0; x < number_players; x = x+1) {
+	Object spillerdata1 = players.get(x);
+	String spillerdata = spillerdata1.toString();
+	String[] spillerdata2 = spillerdata.split(",");
+	String spillerdata3 = spillerdata2[4];
+	String[] spillernavn = spillerdata3.split("=");
+	String currentplayer = spillernavn[1];
+	
+	if(!currentplayer.equals(EpicBot.name)) {
+		String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
+		String[] spillerpos2 = spillerpos.split("=");
+		String spillerpo3 = spillerpos2[1];
+		//Henter ut x/j og y/k 
+		String[] spillerpos4 = spillerpo3.split(",");
+		String spillerposJ = spillerpos4[0].replace(" ", "");
+		String spillerposK = spillerpos4[1].replace(" ", "");;
+		
+		int playerJ = Integer.parseInt(spillerposJ);
+		int playerK = Integer.parseInt(spillerposK);
+		int distanceJ = posJ - playerJ;
+		int distanceK = posK - playerK;
+		if(distanceJ < 0) {
+			//Convert to +
+			distanceJ = distanceJ + (2*(-1*distanceJ));
+		}
+		if(distanceK < 0) {
+			//Convert to +
+			distanceK = distanceK + (2*(-1*distanceK));
+		}
+		int distance = distanceJ + distanceK;
+		System.out.println("Distance to "+currentplayer+ " is " + distanceJ+":"+distanceK);
+		System.out.println(closest);
+		if(distance < closest) {
+			System.out.println(distance + " < " + closest);
+		closestJ = 	playerJ;
+		closestK = 	playerK;
+		closestName = currentplayer;
+		closest = closestJ + closestK;
+		}
+		
+	}
+	
+	
+}
+System.out.println("The closest player is "+ closestName + " and is standing at "+closestJ+":"+closestK);
+return closestK;
+	}
+	
+	public static int closestPlayerJ(Map map, int posJ, int posK)  {
+		String closestName = null;
+		int closestJ = 0;
+		int closestK = 0;
+		int closest = 1000;
+		
+		ArrayList<ArrayList> players = new ArrayList<ArrayList>();
+		 players.clear();
+players.addAll((Collection<ArrayList>) map.get("players"));
+int number_players = players.size();
+for(int x = 0; x < number_players; x = x+1) {
+	Object spillerdata1 = players.get(x);
+	String spillerdata = spillerdata1.toString();
+	String[] spillerdata2 = spillerdata.split(",");
+	String spillerdata3 = spillerdata2[4];
+	String[] spillernavn = spillerdata3.split("=");
+	String currentplayer = spillernavn[1];
+	
+	if(!currentplayer.equals(EpicBot.name)) {
+		String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
+		String[] spillerpos2 = spillerpos.split("=");
+		String spillerpo3 = spillerpos2[1];
+		//Henter ut x/j og y/k 
+		String[] spillerpos4 = spillerpo3.split(",");
+		String spillerposJ = spillerpos4[0].replace(" ", "");
+		String spillerposK = spillerpos4[1].replace(" ", "");;
+		
+		int playerJ = Integer.parseInt(spillerposJ);
+		int playerK = Integer.parseInt(spillerposK);
+		int distanceJ = posJ - playerJ;
+		int distanceK = posK - playerK;
+		if(distanceJ < 0) {
+			//Convert to +
+			distanceJ = distanceJ + (2*(-1*distanceJ));
+		}
+		if(distanceK < 0) {
+			//Convert to +
+			distanceK = distanceK + (2*(-1*distanceK));
+		}
+		int distance = distanceJ + distanceK;
+		System.out.println("Distance to "+currentplayer+ " is " + distanceJ+":"+distanceK);
+		System.out.println(closest);
+		if(distance < closest) {
+			System.out.println(distance + " < " + closest);
+		closestJ = 	playerJ;
+		closestK = 	playerK;
+		closestName = currentplayer;
+		closest = closestJ + closestK;
+		}
+		
+	}
+	
+	
+}
+System.out.println("The closest player is "+ closestName + " and is standing at "+closestJ+":"+closestK);
+return closestJ;
+	}
 	
 }
