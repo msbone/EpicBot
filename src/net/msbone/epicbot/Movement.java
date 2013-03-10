@@ -152,9 +152,8 @@ public class Movement {
 		return false;
 	}
 	
-	private boolean walkable(int j, int k, Object[][] kart){
+	public boolean walkable(int j, int k, Object[][] kart){
 		int aSize = kart[0].length;
-		System.out.println("aSize = " + aSize);
 		if(j >= 0 && k >= 0 && j < aSize && k < aSize){
 			if(!kart[j][k].equals("O") && !kart[j][k].equals("V") && !kart[j][k].equals("S")){
 				return true;
