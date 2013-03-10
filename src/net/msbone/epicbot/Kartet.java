@@ -41,4 +41,34 @@ public class Kartet {
 		return size;
 	}
 	
+	
+	Movement walkable = new Movement();
+	
+	
+	public void CreateWalkableArray(Object[][] kart){
+		
+		int num_walkable = 0;
+		for(int j2 = 0; j2 < size; j2 += 1) {
+			for(int k2 = 0; k2 < size; k2 += 1) {
+				if(walkable.walkable(j2, k2, kart)){
+					num_walkable += 1;
+				}
+			}
+        }
+		int c = 0;
+		String[] walkableArray = walkableArray = new String[num_walkable];
+		for(int j = 0; j < size; j += 1) {
+			for(int k = 0; k < size; k += 1) {
+				if(walkable.walkable(j, k, kart)){
+					walkableArray[c] = j + "," + k;
+					c += 1;
+				}
+			}
+        }
+		for(int c2 = 0; c2 < num_walkable; c2 += 1){
+			System.out.println("walkableArray[" + c2 + "] = " + walkableArray[c2]);
+		}
+		
+	}
+	
 }

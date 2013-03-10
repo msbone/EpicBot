@@ -115,11 +115,17 @@ public class Client {
 							Loadout.loadout(Kartet.readmap(map), Kartet.mapSize());
 							System.out.println(data);
 							
+							
+								
 						}
 						else {
 							//Må lese kartet her!
 							
 							Object kart[][] = Kartet.readmap(map);
+							
+							Kartet kartet = new Kartet();
+							kartet.CreateWalkableArray(kart);
+							
 							
 							System.out.println("Rounde " + runde + " is started");
 							//Sjekke om det er min tur?
