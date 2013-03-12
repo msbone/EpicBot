@@ -68,7 +68,7 @@ public class Loadout{
     int c3 = 0;
     int c4 = 0;
     
-    //finner det beste våpenet, og setter det til primary
+    //finner det beste vï¿½penet, og setter det til primary
     while(c3 <= 2){
     	if(weapons[c3] > largest){
     		largest = weapons[c3];
@@ -79,7 +79,7 @@ public class Loadout{
     c3 += 1;
     }
     
-    //Vi finner det andt beste våpenet, og setter det til secondary
+    //Vi finner det andt beste vï¿½penet, og setter det til secondary
     while(c4 <= 2){
     	//finner den laveste verdien
     	if(weapons[c4] < smallest){
@@ -107,6 +107,7 @@ public class Loadout{
 		//Vi sender loadout til serveren
 		Map<String, String> connect = new HashMap<String, String>();
 		connect.put("message", "loadout");
+		//Forced use of laser!
 		connect.put("primary-weapon", "laser");
 		//connect.put("primary-weapon", primary_weapon);
 		connect.put("secondary-weapon", secondary_weapon);
