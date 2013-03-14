@@ -80,6 +80,67 @@ if(currentplayer.equals(EpicBot.name)) {
 return 0;
 	}
 	
+	public static int getPosOfPlayerK(String name, Map map) {
+		ArrayList<ArrayList> players = new ArrayList<ArrayList>();
+		players.clear();
+		players.addAll((Collection<ArrayList>) map.get("players"));
+		int number_players = players.size();
+		for(int x = 0; x < number_players; x = x+1) {
+			Object spillerdata1 = players.get(x);
+			String spillerdata = spillerdata1.toString();
+			String[] spillerdata2 = spillerdata.split(",");
+			String spillerdata3 = spillerdata2[4];
+			String[] spillernavn = spillerdata3.split("=");
+			String currentplayer = spillernavn[1];
+			if(currentplayer == name) {
+			//We found him, return his pos now	
+				String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
+				String[] spillerpos2 = spillerpos.split("=");
+				String spillerpo3 = spillerpos2[1];
+				System.out.println(spillerpo3);
+				//Henter ut x/j og y/k 
+				String[] spillerpos4 = spillerpo3.split(",");
+				String spillerposK = spillerpos4[1].replace(" ", "");;
+				
+				int posK = Integer.parseInt(spillerposK);
+				return posK;
+				
+			}
+		}
+		return 0;
+	}
+	
+	public static int getPosOfPlayerJ(String name, Map map) {
+		ArrayList<ArrayList> players = new ArrayList<ArrayList>();
+		players.clear();
+		players.addAll((Collection<ArrayList>) map.get("players"));
+		int number_players = players.size();
+		for(int x = 0; x < number_players; x = x+1) {
+			Object spillerdata1 = players.get(x);
+			String spillerdata = spillerdata1.toString();
+			String[] spillerdata2 = spillerdata.split(",");
+			String spillerdata3 = spillerdata2[4];
+			String[] spillernavn = spillerdata3.split("=");
+			String currentplayer = spillernavn[1];
+			if(currentplayer == name) {
+			//We found him, return his pos now	
+				String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
+				String[] spillerpos2 = spillerpos.split("=");
+				String spillerpo3 = spillerpos2[1];
+				System.out.println(spillerpo3);
+				//Henter ut x/j og y/k 
+				String[] spillerpos4 = spillerpo3.split(",");
+				String spillerposJ = spillerpos4[0].replace(" ", "");
+				
+				int posJ = Integer.parseInt(spillerposJ);
+				return posJ;
+				
+			}
+		}
+		return 0;
+	}
+	
+	
 	public static int closestPlayerK(Map map, int posJ, int posK)  {
 		String closestName = null;
 		int closestJ = 0;
@@ -194,6 +255,17 @@ for(int x = 0; x < number_players; x = x+1) {
 }
 System.out.println("The closest player is "+ closestName + " and is standing at "+closestJ+":"+closestK);
 return closestJ;
+	}
+	
+	public void bestPlayerToAttack(int playerPosJ, int playerPosK, String Weapon, Object[][] map) {
+		//Find the best player to Attack
+		
+		//Closest player is (Use the basic function for now, use Johan-Henrik method later)
+		
+		
+		
+		
+		
 	}
 	
 }

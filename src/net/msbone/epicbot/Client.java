@@ -81,6 +81,7 @@ public class Client {
 				//All the fun happens here!
 				String data = inFromServer.readLine();
 				if(data != null) {
+					System.out.println(data);
 					//Vi har motatt data fra server, la oss sjekke den ut!
 					Type type =  new TypeToken<Map<String, Object>>(){}.getType();
 					Gson gson = new Gson();
