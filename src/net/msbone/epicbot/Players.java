@@ -36,7 +36,7 @@ if(currentplayer.equals(EpicBot.name)) {
 	String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
 	String[] spillerpos2 = spillerpos.split("=");
 	String spillerpo3 = spillerpos2[1];
-	System.out.println(spillerpo3);
+	//System.out.println(spillerpo3);
 	//Henter ut x/j og y/k 
 	String[] spillerpos4 = spillerpo3.split(",");
 	String spillerposJ = spillerpos4[0].replace(" ", "");
@@ -65,7 +65,7 @@ if(currentplayer.equals(EpicBot.name)) {
 	String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
 	String[] spillerpos2 = spillerpos.split("=");
 	String spillerpo3 = spillerpos2[1];
-	System.out.println(spillerpo3);
+	//System.out.println(spillerpo3);
 	//Henter ut x/j og y/k 
 	String[] spillerpos4 = spillerpo3.split(",");
 	String spillerposJ = spillerpos4[0].replace(" ", "");
@@ -97,7 +97,7 @@ return 0;
 				String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
 				String[] spillerpos2 = spillerpos.split("=");
 				String spillerpo3 = spillerpos2[1];
-				System.out.println(spillerpo3);
+				//System.out.println(spillerpo3);
 				//Henter ut x/j og y/k 
 				String[] spillerpos4 = spillerpo3.split(",");
 				String spillerposK = spillerpos4[1].replace(" ", "");;
@@ -127,7 +127,7 @@ return 0;
 				String spillerpos = spillerdata2[2] + ","+ spillerdata2[3];
 				String[] spillerpos2 = spillerpos.split("=");
 				String spillerpo3 = spillerpos2[1];
-				System.out.println(spillerpo3);
+				//System.out.println(spillerpo3);
 				//Henter ut x/j og y/k 
 				String[] spillerpos4 = spillerpo3.split(",");
 				String spillerposJ = spillerpos4[0].replace(" ", "");
@@ -257,8 +257,40 @@ System.out.println("The closest player is "+ closestName + " and is standing at 
 return closestJ;
 	}
 	
-	public void bestPlayerToAttack(int playerPosJ, int playerPosK, String Weapon, Object[][] map) {
+	public String getPlayers(Map map) {
+		String finalreturn = "";
+		
+ArrayList<ArrayList> players = new ArrayList<ArrayList>();
+		 players.clear();
+players.addAll((Collection<ArrayList>) map.get("players"));
+int number_players = players.size();
+for(int x = 0; x < number_players; x = x+1) {
+	Object spillerdata1 = players.get(x);
+	String spillerdata = spillerdata1.toString();
+	String[] spillerdata2 = spillerdata.split(",");
+	String spillerdata3 = spillerdata2[4];
+	String[] spillernavn = spillerdata3.split("=");
+	
+	if(players.size() == x) {
+		finalreturn += spillernavn[1];
+	}
+	else {
+		finalreturn += spillernavn[1] + ",";
+	}
+}
+		return finalreturn;
+	}
+	
+	public void bestPlayerToAttack(int playerPosJ, int playerPosK, String Weapon, Map map) {
 		//Find the best player to Attack
+		
+		//Get all the players
+	 	String playersname = getPlayers(map);
+		String[] playerlist = playersname.split(",");
+		for(int x = 0; x < playerlist.length; x = x+1) {
+		System.out.println(playerlist[x]);
+		}
+		
 		
 		//Closest player is (Use the basic function for now, use Johan-Henrik method later)
 		

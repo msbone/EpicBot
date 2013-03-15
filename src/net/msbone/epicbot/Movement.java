@@ -14,8 +14,8 @@ public class Movement {
 	//Bot-left = J + 1
 	
 	public boolean canMoveTop(boolean move, int posJ, int posK, Object kart[][]) {
-		System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		System.out.println("Will try to move TOP");
+		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
+		//System.out.println("Will try to move TOP");
 		int blockInfrontJ = posJ + 1;
 		int blockInfrontK = posK + 1;
 		if(walkable(blockInfrontJ, blockInfrontK, kart)) {
@@ -24,7 +24,7 @@ public class Movement {
 				//Move!
 				Gson gson = new Gson();
 				Map<String, String> moveMessage = new HashMap<String, String>();
-				System.out.println("Moving to " + kart[blockInfrontJ][blockInfrontK] + " at " + blockInfrontJ + ":" + blockInfrontK);
+				//System.out.println("Moving to " + kart[blockInfrontJ][blockInfrontK] + " at " + blockInfrontJ + ":" + blockInfrontK);
 				moveMessage.put("message", "action");
 				moveMessage.put("type", "move");
 				moveMessage.put("direction", "down");
@@ -42,12 +42,12 @@ public class Movement {
 		if(walkable(blockInbackJ, blockInbackK, kart)) {
 			//Can move
 			if(move){
-				System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-				System.out.println("Will try to move BOT");
+				//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
+				//System.out.println("Will try to move BOT");
 				//Move!
 				Gson gson = new Gson();
 				Map<String, String> moveMessage = new HashMap<String, String>();
-				System.out.println("Moving to " + kart[blockInbackJ][blockInbackK] + " at " + blockInbackJ + ":" + blockInbackK);
+				//System.out.println("Moving to " + kart[blockInbackJ][blockInbackK] + " at " + blockInbackJ + ":" + blockInbackK);
 				moveMessage.put("message", "action");
 				moveMessage.put("type", "move");
 				moveMessage.put("direction", "up");
@@ -60,8 +60,8 @@ public class Movement {
 		return false;
 	}
 	public boolean canMoveLeftTop(boolean move, int posJ, int posK, Object kart[][]) {
-		System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		System.out.println("Will try to move LEFT TOP");
+		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
+		//System.out.println("Will try to move LEFT TOP");
 		int blockInleftTopK = posK - 1;
 		int blockInleftTopJ = posJ;
 		if(walkable(blockInleftTopJ, blockInleftTopK, kart)) {
@@ -70,7 +70,7 @@ public class Movement {
 				//Move!
 				Gson gson = new Gson();
 				Map<String, String> moveMessage = new HashMap<String, String>();
-				System.out.println("Moving to " + kart[blockInleftTopJ][blockInleftTopK] + " at " + blockInleftTopJ + ":" + blockInleftTopK);
+				//System.out.println("Moving to " + kart[blockInleftTopJ][blockInleftTopK] + " at " + blockInleftTopJ + ":" + blockInleftTopK);
 				moveMessage.put("message", "action");
 				moveMessage.put("type", "move");
 				moveMessage.put("direction", "left-down");
@@ -83,8 +83,8 @@ public class Movement {
 		return false;
 	}
 	public boolean canMoveLeftBot(boolean move, int posJ, int posK, Object kart[][]) {
-		System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		System.out.println("Will try to move LEFT BOT");
+		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
+		//System.out.println("Will try to move LEFT BOT");
 		int blockInleftBotK = posK + 1;
 		int blockInleftBotJ = posJ;
 		if(walkable(blockInleftBotJ, blockInleftBotK, kart)) {
@@ -93,7 +93,7 @@ public class Movement {
 				//Move!
 				Gson gson = new Gson();
 				Map<String, String> moveMessage = new HashMap<String, String>();
-				System.out.println("Moving to " + kart[blockInleftBotJ][blockInleftBotK] + " at " + blockInleftBotJ + ":" + blockInleftBotK);
+				//System.out.println("Moving to " + kart[blockInleftBotJ][blockInleftBotK] + " at " + blockInleftBotJ + ":" + blockInleftBotK);
 				moveMessage.put("message", "action");
 				moveMessage.put("type", "move");
 				moveMessage.put("direction", "left-up");
@@ -106,8 +106,8 @@ public class Movement {
 		return false;
 	}
 	public boolean canMoveRightTop(boolean move, int posJ, int posK, Object kart[][]) {
-		System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		System.out.println("Will try to move RIGHT TOP");
+		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
+		//System.out.println("Will try to move RIGHT TOP");
 		int blockInrightTopK = posK;
 		int blockInrightTopJ = posJ - 1;
 		if(walkable(blockInrightTopJ, blockInrightTopK, kart)) {
@@ -116,7 +116,7 @@ public class Movement {
 				//Move!
 				Gson gson = new Gson();
 				Map<String, String> moveMessage = new HashMap<String, String>();
-				System.out.println("Moving to " + kart[blockInrightTopJ][blockInrightTopK] + " at " + blockInrightTopJ + ":" + blockInrightTopK);
+				//System.out.println("Moving to " + kart[blockInrightTopJ][blockInrightTopK] + " at " + blockInrightTopJ + ":" + blockInrightTopK);
 				moveMessage.put("message", "action");
 				moveMessage.put("type", "move");
 				moveMessage.put("direction", "right-down");
@@ -129,8 +129,8 @@ public class Movement {
 		return false;
 	}
 	public boolean canMoveRightBot(boolean move, int posJ, int posK, Object kart[][]) {
-		System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		System.out.println("Will try to move RIGHT BOT");
+		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
+		//System.out.println("Will try to move RIGHT BOT");
 		int blockInrightBotK = posK + 1;
 		int blockInrightBotJ = posJ;
 		if(walkable(blockInrightBotJ, blockInrightBotK, kart)) {
@@ -139,7 +139,7 @@ public class Movement {
 				//Move!
 				Gson gson = new Gson();
 				Map<String, String> moveMessage = new HashMap<String, String>();
-				System.out.println("Moving to " + kart[blockInrightBotJ][blockInrightBotK] + " at " + blockInrightBotJ + ":" + blockInrightBotK);
+				//System.out.println("Moving to " + kart[blockInrightBotJ][blockInrightBotK] + " at " + blockInrightBotJ + ":" + blockInrightBotK);
 				moveMessage.put("message", "action");
 				moveMessage.put("type", "move");
 				moveMessage.put("direction", "right-up");

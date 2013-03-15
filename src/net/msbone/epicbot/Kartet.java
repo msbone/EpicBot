@@ -66,7 +66,9 @@ public class Kartet {
 			}
         }
 		for(int c2 = 0; c2 < num_walkable; c2 += 1){
-			System.out.println("walkableArray[" + c2 + "] = " + walkableArray[c2]);
+			
+			//Commented out to save some console place :)
+			//System.out.println("walkableArray[" + c2 + "] = " + walkableArray[c2]);
 		}
 		
 	}

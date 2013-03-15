@@ -96,12 +96,14 @@ public class Loadout{
     }
     
     //printer hvor mye som finnes av forskjellige tiles(blokker)
-    System.out.println("grass: " + grass);
-    System.out.println("tom: " + tom);
-    System.out.println("explodium: " + explodium);
-    System.out.println("rubidium: " + rubidium);
-    System.out.println("scrap: " + scrap);
-    System.out.println("rock: " + rock);
+    
+    //Comented out to clear some Console place
+    //System.out.println("grass: " + grass);
+    //System.out.println("tom: " + tom);
+    //System.out.println("explodium: " + explodium);
+    //System.out.println("rubidium: " + rubidium);
+    //System.out.println("scrap: " + scrap);
+    //System.out.println("rock: " + rock);
     
     
 		//Vi sender loadout til serveren

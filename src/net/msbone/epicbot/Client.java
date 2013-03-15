@@ -54,7 +54,7 @@ public class Client {
 	}
 	
 	public static void sendMessage(String message) {
-		System.out.println("Message sent to server: " + message);
+		//System.out.println("Message sent to server: " + message);
 		try {
 			outToServer.writeBytes(message + '\n');
 			outToServer.flush();
@@ -81,7 +81,7 @@ public class Client {
 				//All the fun happens here!
 				String data = inFromServer.readLine();
 				if(data != null) {
-					System.out.println(data);
+					//System.out.println(data);
 					//Vi har motatt data fra server, la oss sjekke den ut!
 					Type type =  new TypeToken<Map<String, Object>>(){}.getType();
 					Gson gson = new Gson();
@@ -136,7 +136,9 @@ public class Client {
 								
 								
 								//La oss sjekke om vi kan angripe nokke :)
-								System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "laser", kart));
+								
+								//Comented out to save some console place
+								//System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "laser", kart));
 								
 								
 								System.out.println("Lets move!");
@@ -148,12 +150,12 @@ public class Client {
 									boolean didmove = false;
 									while(didmove == false) {
 									int num = generator.nextInt(6);
-									if(num == 1) {didmove = movement.canMoveTop(true, posJ, posK, kart);}
-									else if(num == 2) {didmove = movement.canMoveBot(true, posJ, posK, kart);} 
-									else if(num == 3) {didmove = movement.canMoveLeftTop(true, posJ, posK, kart);} 
-									else if(num == 4) {didmove = movement.canMoveLeftBot(true, posJ, posK, kart);} 
-									else if(num == 5) {didmove = movement.canMoveRightTop(true, posJ, posK, kart);} 
-									else if(num == 6) {didmove = movement.canMoveRightBot(true, posJ, posK, kart);} 
+									if(num == 0) {didmove = movement.canMoveTop(true, posJ, posK, kart);}
+									else if(num == 1) {didmove = movement.canMoveBot(true, posJ, posK, kart);} 
+									else if(num == 2) {didmove = movement.canMoveLeftTop(true, posJ, posK, kart);} 
+									else if(num == 3) {didmove = movement.canMoveLeftBot(true, posJ, posK, kart);} 
+									else if(num == 4) {didmove = movement.canMoveRightTop(true, posJ, posK, kart);} 
+									else if(num == 5) {didmove = movement.canMoveRightBot(true, posJ, posK, kart);} 
 									else{System.out.println(num); didmove = false;}
 									}
 									Thread.sleep(10);
@@ -163,6 +165,10 @@ public class Client {
 					}
 					else if(message.equals("endturn")) {
 						System.out.println("Rounde is done");
+						
+					}
+					else if(message.equals("action")) {
+						
 						
 					}
 					else {
