@@ -188,7 +188,7 @@ for(int x = 0; x < number_players; x = x+1) {
 		closestJ = 	playerJ;
 		closestK = 	playerK;
 		closestName = currentplayer;
-		closest = closestJ + closestK;
+		closest = distance;
 		}
 		
 	}
@@ -246,7 +246,7 @@ for(int x = 0; x < number_players; x = x+1) {
 		closestJ = 	playerJ;
 		closestK = 	playerK;
 		closestName = currentplayer;
-		closest = closestJ + closestK;
+		closest = distance;
 		}
 		
 	}
