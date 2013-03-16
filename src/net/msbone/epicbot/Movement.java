@@ -166,4 +166,17 @@ public class Movement {
 			return false;
 		}
 	}
+/*	
+	public void path(int j, int k){
+		
+	}
+	
+	public String runners(){
+		
+		if(edge found){
+			save edge point edge[z] = "x,y";
+		}
+		return "yo";
+	}
+*/
 }
