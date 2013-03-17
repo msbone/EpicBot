@@ -8,56 +8,90 @@ import com.google.gson.Gson;
 
 public class Weapon {
 
+	public static int laserRange = 5;
+	
 	public static boolean InRange(int posJ, int posK, int enemyJ, int enemyK, String weapon, Object[][] kart){
 		//Do a check if player standing at posK/posJ can attack using weapon
 		
-		int laserRange = 5;
-		
-		if(weapon.equalsIgnoreCase("laser") && 1==1) {
+		if(weapon.equals("laser")) {
 			
-			int topJfinal;
-			int topKfinal;
+			int topJ;
+			int topK;
+			boolean top = true;
 			
-			int botJfinal;
-			int botKfinal;
+			int botJ;
+			int botK;
+			boolean bot = true;
 			
-			int lefttopJfinal;
-			int lefttopKfinal;
 			
-			int leftbotJfinal;
-			int leftbotKfinal;
+			int lefttopJ;
+			int lefttopK;
+			boolean lefttop = true;
 			
-			int righttopJfinal;
-			int righttopKfinal;
+			int leftbotJ;
+			int leftbotK;
+			boolean leftbot = true;
 			
-			int rightbotJfinal;
-			int rightbotKfinal;
+			int righttopJ;
+			int righttopK;
+			boolean righttop = true;
+			
+			int rightbotJ;
+			int rightbotK;
+			boolean rightbot = true;
+			
 			
 			
 			int x = 0;
 			while(x < laserRange) {
 				
 				//Move to all the sides
-				topJfinal = posJ + x;
-				topKfinal = posK + x;
+				topJ = posJ + x;
+				topK = posK + x;
 				
-				botJfinal = posJ - x;
-				botKfinal = posK - x;
 				
-				lefttopJfinal = posJ;
-				lefttopKfinal = posK - x;
+				botJ = posJ - x;
+				botK = posK - x;
 				
-				leftbotJfinal = posJ + x;
-				leftbotKfinal = posK;
+				lefttopJ = posJ;
+				lefttopK = posK - x;
 				
-				righttopJfinal = posJ - x;
-				righttopKfinal = posK;
+				leftbotJ = posJ + x;
+				leftbotK = posK;
 				
-				rightbotJfinal = posJ + x;
-				rightbotKfinal = posK;
+				righttopJ = posJ - x;
+				righttopK = posK;
 				
-				if(topJfinal == enemyJ && topKfinal == enemyK) {
-					//Shoot down
+				rightbotJ = posJ + x;
+				rightbotK = posK;
+				
+				//Check if we have hit stone
+				if(kart[topJ][topK] == "O") {
+					top = false;
+				}
+				//Check if we have hit stone
+				if(kart[botJ][botK] == "O") {
+					bot = false;
+				}
+				//Check if we have hit stone
+				if(kart[lefttopJ][lefttopK] == "O") {
+					lefttop = false;
+				}
+				//Check if we have hit stone
+				if(kart[leftbotJ][leftbotK] == "O") {
+					leftbot = false;
+				}
+				//Check if we have hit stone
+				if(kart[righttopJ][righttopK] == "O") {
+					righttop = false;
+				}
+				//Check if we have hit stone
+				if(kart[rightbotJ][rightbotK] == "O") {
+					rightbot = false;
+				}
+				
+				if(top && topJ == enemyJ && topK == enemyK) {
+					//Shoot down					
 					Gson gson = new Gson();
 					Map<String, String> moveMessage = new HashMap<String, String>();
 					moveMessage.put("message", "action");
@@ -68,7 +102,7 @@ public class Weapon {
 					return true;
 				}
 				
-				if(botJfinal == enemyJ && botKfinal == enemyK) {
+				if(bot && botJ == enemyJ && botK == enemyK) {
 					//Shoot up
 					Gson gson = new Gson();
 					Map<String, String> moveMessage = new HashMap<String, String>();
@@ -80,7 +114,7 @@ public class Weapon {
 					return true;
 				}
 				
-				if(lefttopJfinal == enemyJ && lefttopKfinal == enemyK) {
+				if(lefttop && lefttopJ == enemyJ && lefttopK == enemyK) {
 					//Shoot left top
 					Gson gson = new Gson();
 					Map<String, String> moveMessage = new HashMap<String, String>();
@@ -92,7 +126,7 @@ public class Weapon {
 					return true;
 				}
 				
-				if(leftbotJfinal == enemyJ && leftbotKfinal == enemyK) {
+				if(leftbot && leftbotJ == enemyJ && leftbotK == enemyK) {
 					//Shoot left down
 					Gson gson = new Gson();
 					Map<String, String> moveMessage = new HashMap<String, String>();
@@ -104,7 +138,7 @@ public class Weapon {
 					return true;
 				}
 				
-				if(righttopJfinal == enemyJ && righttopKfinal == enemyK) {
+				if(righttop && righttopJ == enemyJ && righttopK == enemyK) {
 					//Shoot right top
 					Gson gson = new Gson();
 					Map<String, String> moveMessage = new HashMap<String, String>();
@@ -116,7 +150,7 @@ public class Weapon {
 					return true;
 				}
 				
-				if(rightbotJfinal == enemyJ && rightbotKfinal == enemyK) {
+				if(rightbot && rightbotJ == enemyJ && rightbotK == enemyK) {
 					//Shoot right down
 					Gson gson = new Gson();
 					Map<String, String> moveMessage = new HashMap<String, String>();
