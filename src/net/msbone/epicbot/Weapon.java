@@ -8,7 +8,52 @@ import com.google.gson.Gson;
 
 public class Weapon {
 
-	public static int laserRange = 5;
+	private static String mainWeapon;
+	private static String secWeapon;
+	
+	private static int mainWeaponLvL = 1;
+	private static int secWeaponLvL = 1;
+	
+	private static int laserRange = 5;
+	
+	public static void setWeapons(String main, String sec) {
+		mainWeapon = main;
+		secWeapon = sec;
+	}
+	
+	public static void upgrade(String weapon) {
+		//TODO check if we can acctual upgrade the weapon
+		
+		if(weapon.equals(mainWeapon)) {
+			mainWeaponLvL += 1;
+			Gson gson = new Gson();
+			Map<String, String> moveMessage = new HashMap<String, String>();
+			moveMessage.put("message", "action");
+			moveMessage.put("type", "upgrade");
+			moveMessage.put("weapon", weapon);
+			String json = gson.toJson(moveMessage);
+			Client.sendMessage(json);
+		}
+		if(weapon.equals(secWeapon)) {
+			secWeaponLvL += 1;
+			Gson gson = new Gson();
+			Map<String, String> moveMessage = new HashMap<String, String>();
+			moveMessage.put("message", "action");
+			moveMessage.put("type", "upgrade");
+			moveMessage.put("weapon", weapon);
+			String json = gson.toJson(moveMessage);
+			Client.sendMessage(json);
+		}
+		
+	}
+	
+	public static String mainWeapon() {
+		return mainWeapon;
+	}
+	
+	public static String secWeapon() {
+		return secWeapon;
+	}
 	
 	public static boolean InRange(int posJ, int posK, int enemyJ, int enemyK, String weapon, Object[][] kart){
 		//Do a check if player standing at posK/posJ can attack using weapon
