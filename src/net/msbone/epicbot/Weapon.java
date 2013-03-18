@@ -59,6 +59,7 @@ public class Weapon {
 		//Do a check if player standing at posK/posJ can attack using weapon
 		
 		if(weapon.equals("laser")) {
+			System.out.println("Laser");
 			
 			int topJ;
 			int topK;
@@ -110,33 +111,28 @@ public class Weapon {
 				rightbotJ = posJ + x;
 				rightbotK = posK;
 				
-				//Check if we have hit stone
-				if(kart[topJ][topK] == "O") {
+				System.out.println(topJ + " - " + topK);
+				if(top && !canShoot(Kartet.mapSize(), topJ, topK)) {
 					top = false;
 				}
-				//Check if we have hit stone
-				if(kart[botJ][botK] == "O") {
+				if(bot && !canShoot(Kartet.mapSize(), botJ, botK)) {
 					bot = false;
 				}
-				//Check if we have hit stone
-				if(kart[lefttopJ][lefttopK] == "O") {
+				if(lefttop && !canShoot(Kartet.mapSize(), lefttopJ, lefttopK)) {
 					lefttop = false;
 				}
-				//Check if we have hit stone
-				if(kart[leftbotJ][leftbotK] == "O") {
+				if(leftbot && !canShoot(Kartet.mapSize(), leftbotJ, leftbotK)) {
 					leftbot = false;
 				}
-				//Check if we have hit stone
-				if(kart[righttopJ][righttopK] == "O") {
+				if(righttop && !canShoot(Kartet.mapSize(), righttopJ, righttopK)) {
 					righttop = false;
 				}
-				//Check if we have hit stone
-				if(kart[rightbotJ][rightbotK] == "O") {
+				if(rightbot && !canShoot(Kartet.mapSize(), rightbotJ, rightbotK)) {
 					rightbot = false;
 				}
 				
 				if(top && topJ == enemyJ && topK == enemyK) {
-					//Shoot down					
+					//Shoot down		
 					Gson gson = new Gson();
 					Map<String, String> moveMessage = new HashMap<String, String>();
 					moveMessage.put("message", "action");
@@ -214,7 +210,19 @@ public class Weapon {
 		return false;
 	}
 	
-
+public static boolean canShoot(int size, int j, int k) {
+	if(j < 0 || k < 0 || j >= size || k >= size) {
+		return false;
+	}
+	else {
+		Object kart[][] = Kartet.kart;
+		if(kart[j][k].equals("O")) {
+			System.out.println("Hit Stone");
+			return false;
+		}
+	}
+	return true;
+}
 	
 	
 	

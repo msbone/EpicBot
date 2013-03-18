@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 public class Kartet {
 
 	private static int size;
+	public static Object[][] kart;
 	
 	public static Object[][] readmap(Map<String, Object> map) {
 		Gson gson = new Gson();
@@ -24,7 +25,7 @@ public class Kartet {
 	 
 	 size = lines.size();
 	 
-	Object[][] kart = new Object[size][size];
+	kart = new Object[size][size];
 	
 	
 	      for(int j = 0; j < size; j += 1) {
