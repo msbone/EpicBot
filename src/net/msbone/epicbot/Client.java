@@ -144,8 +144,11 @@ public class Client {
 								System.out.println("Lets move!");
 								Random generator = new Random();
 								Movement movement = new Movement();
+								
+								
+								
 								//La oss sjekke hvor vi kan flytte oss
-								for(int move_count = 0; move_count < 3; move_count++){
+								/*for(int move_count = 0; move_count < 3; move_count++){
 									//La oss sjekke hvilken valg vi har :)
 									boolean didmove = false;
 									while(didmove == false) {
@@ -160,6 +163,24 @@ public class Client {
 									}
 									Thread.sleep(10);
 								}
+								*/
+								
+								String moves[] = movement.pathfinder(posJ, posK, 5, 7);
+								
+								for(int i = 0; i<3; i+=1){
+								
+									Map<String, String> moveMessage = new HashMap<String, String>();    
+									moveMessage.put("message", "action");
+									moveMessage.put("type", "move");
+									moveMessage.put("direction", moves[i]);
+									String json = gson.toJson(moveMessage);
+									Client.sendMessage(json);
+								}
+								
+								
+								String move_echo = moves[0] + " " + moves[1] + " " + moves[2] + " " + moves[3] + " " + moves[4] + " " + moves[5];
+								System.out.println("j = " + posJ + " k = " + posK);
+								System.out.println(move_echo);
 							}
 						}
 					}

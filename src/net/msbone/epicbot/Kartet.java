@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 public class Kartet {
 
 	private static int size;
+	public static Object[][] kart;
 	
 	public static Object[][] readmap(Map<String, Object> map) {
 		Gson gson = new Gson();
@@ -24,7 +25,7 @@ public class Kartet {
 	 
 	 size = lines.size();
 	 
-	Object[][] kart = new Object[size][size];
+	kart = new Object[size][size];
 	
 	
 	      for(int j = 0; j < size; j += 1) {
@@ -50,7 +51,7 @@ public class Kartet {
 		int num_walkable = 0;
 		for(int j2 = 0; j2 < size; j2 += 1) {
 			for(int k2 = 0; k2 < size; k2 += 1) {
-				if(walkable.walkable(j2, k2, kart)){
+				if(walkable.walkable(j2, k2)){
 					num_walkable += 1;
 				}
 			}
@@ -59,7 +60,7 @@ public class Kartet {
 		String[] walkableArray = walkableArray = new String[num_walkable];
 		for(int j = 0; j < size; j += 1) {
 			for(int k = 0; k < size; k += 1) {
-				if(walkable.walkable(j, k, kart)){
+				if(walkable.walkable(j, k)){
 					walkableArray[c] = j + "," + k;
 					c += 1;
 				}
