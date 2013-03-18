@@ -165,7 +165,7 @@ public class Client {
 								}
 								*/
 								
-								String moves[] = movement.pathfinder(posJ, posK, 5, 7);
+								String moves[] = movement.pathfinder(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK));
 								
 								for(int i = 0; i<3; i+=1){
 								
