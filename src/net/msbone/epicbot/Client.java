@@ -128,7 +128,7 @@ public class Client {
 							kartet.CreateWalkableArray(kart);
 							
 							
-							System.out.println("Rounde " + runde + " is started");
+							System.out.println("Roun de " + runde + " is started");
 							//Sjekke om det er min tur?
 							if(Players.isMe(map)) {
 								int posJ = Players.myPosJ(map);
@@ -138,7 +138,7 @@ public class Client {
 								//La oss sjekke om vi kan angripe nokke :)
 								
 								//Comented out to save some console place
-								//System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "laser", kart));
+								System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "laser", kart));
 								
 								
 								System.out.println("Lets move!");
