@@ -108,8 +108,8 @@ public class Weapon {
 				righttopJ = posJ - x;
 				righttopK = posK;
 				
-				rightbotJ = posJ + x;
-				rightbotK = posK;
+				rightbotJ = posJ;
+				rightbotK = posK + x;
 				
 				//System.out.println(topJ + " - " + topK);
 				if(top && !canShoot(Kartet.mapSize(), topJ, topK)) {
