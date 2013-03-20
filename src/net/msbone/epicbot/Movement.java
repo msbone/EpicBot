@@ -247,51 +247,84 @@ public class Movement {
 	//Top-left = K - 1
 	//Bot-left = J + 1
 	
-	public int[] closestjk(int j, int k, int j2, int k2){
-		int jf = j;
-		int kf = k;
+	public static int upDistance = 0;
+	public static int downDistance = 0;
+	public static int upRightDistance = 0;
+	public static int upLeftDistance = 0;
+	public static int downRightDistance = 0;
+	public static int downLeftDistance = 0;
+	public String direction(int j, int k, int j2, int k2){
 		int lowest = 0;
 		int distance = 0;
-		for(int i = 1; i<=6; i+=1){
-			switch(i){
-			case 1: jf-=1; distance = (j2-jf) + (k2-kf); lowest = distance; break;
-			case 2: jf+=1; break;
-			case 3: kf-=1; break;
-			case 4: kf+=1; break;
-			case 5: jf+=1; kf+=1; break;
-			case 6: jf-=1; kf-=1; break;
+		String direction = "";
+		
+		int jUp = j-1;
+		int kUp = k-1;
+		upDistance = (j2-j)+(k2-k);
+		if(upDistance < 0){upDistance = upDistance*-1;}
+		System.out.println("updistance: " + upDistance);
+		
+		int jDown = j+1;
+		int kDown = k+1;
+		downDistance = (j2-j)+(k2-k);
+		if(downDistance < 0){downDistance = downDistance*-1;}
+		System.out.println("downDistance: " + downDistance);
+		
+		int jUpRight = j-1;
+		int kUpRight = k;
+		upRightDistance = (j2-j)+(k2-k);
+		if(upRightDistance < 0){upRightDistance = upRightDistance*-1;}
+		System.out.println("upRightDistance: " + upRightDistance);
+		
+		int jUpLeft = j;
+		int kUpLeft = k-1;
+		upLeftDistance = (j2-j)+(k2-k);
+		if(upLeftDistance < 0){upLeftDistance = upLeftDistance*-1;}
+		System.out.println("upLeftDistance: " + upLeftDistance);
+		
+		int jDownRight = j;
+		int kDownRight = k+1;
+		downRightDistance = (j2-j)+(k2-k);
+		if(downRightDistance < 0){downRightDistance = downRightDistance*-1;}
+		System.out.println("downRightDistance: " + downRightDistance);
+		
+		int jDownLeft = j+1;
+		int kDownLeft = k;
+		downLeftDistance = (j2-j)+(k2-k);
+		if(downLeftDistance < 0){downLeftDistance = downLeftDistance*-1;}
+		System.out.println("downLeftDistance: " + downLeftDistance);
+		
+		if(walkable(jUp, kUp) && closest(upDistance)){return "up";}
+		else if(walkable(jDown, kDown) && closest(downDistance)){return "down";}
+		else if(walkable(jUpRight, kUpRight) && closest(upRightDistance)){return "right-up";}
+		else if(walkable(jUpLeft, kUpLeft) && closest(upLeftDistance)){return "left-up";}
+		else if(walkable(jDownRight, kDownRight) && closest(downRightDistance)){return "right-down";}
+		else if(walkable(jDownLeft, kDownLeft) && closest(downLeftDistance)){return "left-down";}
+		
+	return direction;
+	}
+	
+	public boolean closest(int distance){
+		boolean trueorfalse = true;
+			if(distance > upDistance){
+				trueorfalse = false;
 			}
-			if(distance < 0){
-				distance = distance*-1;
+			if(distance > downDistance){
+				trueorfalse = false;
 			}
-			if(lowest < 0){
-				lowest = lowest*-1;
+			if(distance > upRightDistance){
+				trueorfalse = false;
 			}
-			distance = (j2-jf) + (k2-kf);
-			if(distance < lowest){lowest = distance;}
-		}
-		for(int i = 1; i<=6; i+=1){ 
-			switch(i){
-			case 1: jf-=1; distance = (j2-jf) + (k2-kf); break;
-			case 2: jf+=1; break;
-			case 3: kf-=1; break;
-			case 4: kf+=1; break;
-			case 5: jf+=1; kf+=1; break;
-			case 6: jf-=1; kf-=1; break;
+			if(distance > upLeftDistance){
+				trueorfalse = false;
 			}
-			if(distance < 0){
-				distance = distance*-1;
+			if(distance > downRightDistance){
+				trueorfalse = false;
 			}
-			distance = (j2-jf) + (k2-kf);
-			if(distance == lowest){
-				j = jf;
-				k = kf;
+			if(distance > downLeftDistance){
+				trueorfalse = false;
 			}
-		}
-	int[] coords = new int[2];
-	coords[0] = j;
-	coords[1] = k;
-	return coords;
+		return trueorfalse;
 	}
 	
 	//Top-right = J - 1
@@ -303,8 +336,10 @@ public class Movement {
 		//Movement walkable = new Movement();
 		//for(int c1 = 0; c1 <= length; c1 += 1){
 		int c1 = 0;
+		int step = 0;
 		while(c1 < length){
 			if(moves[c1] != null){
+				step = c1+1;
 				switch(moves[c1]){
 					case "up":
 						j -= 1;
@@ -316,13 +351,15 @@ public class Movement {
 							 * and insert new steps.
 							 */
 							
-							// find a tile nearby that is walkable
 							j += 1;
 							k += 1;
-							int[] coords = closestjk(j, k, j2, k2);
-							j = coords[0];
-							k = coords[1];
-							path(j, k, j2, k2, c1); //use this to find a new path and edit the array */					
+							
+							// find a tile nearby that is walkable
+							String direction = direction(j, k, j2, k2);
+							//bytt ut den ene moven som var galt
+							moves[c1] = direction;
+							//finn en ny path herfra
+							path(j, k, j2, k2, step); 				
 							
 						}
 						break;
@@ -332,10 +369,12 @@ public class Movement {
 						if(!walkable(j, k)){
 							j -= 1;
 							k -= 1;
-							int[] coords = closestjk(j, k, j2, k2);
-							j = coords[0];
-							k = coords[1];
-							path(j, k, j2, k2, c1);
+							// find a tile nearby that is walkable
+							String direction = direction(j, k, j2, k2);
+							//bytt ut den ene moven som var galt
+							moves[c1] = direction;
+							//finn en ny path herfra
+							path(j, k, j2, k2, step); 	
 							
 						}
 						break;
@@ -343,20 +382,24 @@ public class Movement {
 						j -= 1;
 						if(!walkable(j, k)){
 							j += 1;
-							int[] coords = closestjk(j, k, j2, k2);
-							j = coords[0];
-							k = coords[1];
-							path(j, k, j2, k2, c1);
+							// find a tile nearby that is walkable
+							String direction = direction(j, k, j2, k2);
+							//bytt ut den ene moven som var galt
+							moves[c1] = direction;
+							//finn en ny path herfra
+							path(j, k, j2, k2, step); 	
 						}
 						break;
 					case "right-down":
 						k += 1;
 						if(!walkable(j, k)){
 							k -= 1;
-							int[] coords = closestjk(j, k, j2, k2);
-							j = coords[0];
-							k = coords[1];
-							path(j, k, j2, k2, c1);
+							// find a tile nearby that is walkable
+							String direction = direction(j, k, j2, k2);
+							//bytt ut den ene moven som var galt
+							moves[c1] = direction;
+							//finn en ny path herfra
+							path(j, k, j2, k2, step); 	
 							
 						}
 						break;
@@ -364,10 +407,12 @@ public class Movement {
 						k -= 1;
 						if(!walkable(j, k)){
 							k += 1;
-							int[] coords = closestjk(j, k, j2, k2);
-							j = coords[0];
-							k = coords[1];
-							path(j, k, j2, k2, c1);
+							// find a tile nearby that is walkable
+							String direction = direction(j, k, j2, k2);
+							//bytt ut den ene moven som var galt
+							moves[c1] = direction;
+							//finn en ny path herfra
+							path(j, k, j2, k2, step); 	
 							
 						}
 						break;
@@ -375,10 +420,12 @@ public class Movement {
 						j += 1;
 						if(!walkable(j, k)){
 							j -= 1;
-							int[] coords = closestjk(j, k, j2, k2);
-							j = coords[0];
-							k = coords[1];
-							path(j, k, j2, k2, c1);
+							// find a tile nearby that is walkable
+							String direction = direction(j, k, j2, k2);
+							//bytt ut den ene moven som var galt
+							moves[c1] = direction;
+							//finn en ny path herfra
+							path(j, k, j2, k2, step);
 	
 						}
 						break;

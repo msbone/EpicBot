@@ -84,7 +84,7 @@ public class Loadout{
     	//finner den laveste verdien
     	if(weapons[c4] < smallest){
     		smallest = weapons[c4];
-    		System.out.println("smallest= " + smallest);
+    		//System.out.println("smallest= " + smallest);
     	}
     	//finner den mellomste verdien
     	if(weapons[c4] > smallest && weapons[c4] < largest){

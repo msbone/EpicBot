@@ -128,7 +128,7 @@ public class Client {
 							kartet.CreateWalkableArray(kart);
 							
 							
-							System.out.println("Rounde " + runde + " is started");
+							//System.out.println("Rounde " + runde + " is started");
 							//Sjekke om det er min tur?
 							if(Players.isMe(map)) {
 								int posJ = Players.myPosJ(map);
@@ -141,7 +141,7 @@ public class Client {
 								System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "laser", kart));
 								
 								
-								System.out.println("Lets move!");
+								//System.out.println("Lets move!");
 								Random generator = new Random();
 								Movement movement = new Movement();
 								
@@ -165,7 +165,9 @@ public class Client {
 								}
 								*/
 								
-								String moves[] = movement.pathfinder(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK));
+								int goalj = Players.closestPlayerJ(map, posJ, posK);
+								int goalk = Players.closestPlayerK(map, posJ, posK);
+								String moves[] = movement.pathfinder(posJ, posK, goalj, goalk);
 								
 								for(int i = 0; i<3; i+=1){
 								
@@ -178,14 +180,15 @@ public class Client {
 								}
 								
 								
-								String move_echo = moves[0] + " " + moves[1] + " " + moves[2] + " " + moves[3] + " " + moves[4] + " " + moves[5];
-								System.out.println("j = " + posJ + " k = " + posK);
+								String move_echo = "moves: " + moves[0] + " " + moves[1] + " " + moves[2] + " " + moves[3] + " " + moves[4] + " " + moves[5];
+								System.out.println("our_pos: (" + posJ + "," + posK + ")");
+								System.out.println("goal: (" + goalj + "," + goalk + ")");
 								System.out.println(move_echo);
 							}
 						}
 					}
 					else if(message.equals("endturn")) {
-						System.out.println("Rounde is done");
+						//System.out.println("Rounde is done");
 						
 					}
 					else if(message.equals("action")) {
@@ -194,7 +197,7 @@ public class Client {
 					}
 					else {
 						//Unknown message!
-						System.out.println("Ukjent data motatt fra server " + data);
+						//System.out.println("Ukjent data motatt fra server " + data);
 					}
 					
 				}

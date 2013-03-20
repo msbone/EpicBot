@@ -59,7 +59,7 @@ public class Weapon {
 		//Do a check if player standing at posK/posJ can attack using weapon
 		
 		if(weapon.equals("laser")) {
-			System.out.println("Laser");
+			//System.out.println("Laser");
 			
 			int topJ;
 			int topK;
@@ -111,7 +111,7 @@ public class Weapon {
 				rightbotJ = posJ + x;
 				rightbotK = posK;
 				
-				System.out.println(topJ + " - " + topK);
+				//System.out.println(topJ + " - " + topK);
 				if(top && !canShoot(Kartet.mapSize(), topJ, topK)) {
 					top = false;
 				}
@@ -217,7 +217,7 @@ public static boolean canShoot(int size, int j, int k) {
 	else {
 		Object kart[][] = Kartet.kart;
 		if(kart[j][k].equals("O")) {
-			System.out.println("Hit Stone");
+			//System.out.println("Hit Stone");
 			return false;
 		}
 	}

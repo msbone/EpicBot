@@ -16,7 +16,7 @@ public class Players {
 		String[] spillernavn = spillerdata3.split("=");
 		String currentplayer = spillernavn[1];
 		if(currentplayer.equals(EpicBot.name)) {
-			System.out.println(currentplayer);
+			//System.out.println(currentplayer);
 			return true;
 		}
 		return false;
@@ -181,10 +181,10 @@ for(int x = 0; x < number_players; x = x+1) {
 			distanceK = distanceK + (2*(-1*distanceK));
 		}
 		int distance = distanceJ + distanceK;
-		System.out.println("Distance to "+currentplayer+ " is " + distanceJ+":"+distanceK);
-		System.out.println(closest);
+		//System.out.println("Distance to "+currentplayer+ " is " + distanceJ+":"+distanceK);
+		//System.out.println(closest);
 		if(distance < closest) {
-			System.out.println(distance + " < " + closest);
+			//System.out.println(distance + " < " + closest);
 		closestJ = 	playerJ;
 		closestK = 	playerK;
 		closestName = currentplayer;
@@ -195,7 +195,7 @@ for(int x = 0; x < number_players; x = x+1) {
 	
 	
 }
-System.out.println("The closest player is "+ closestName + " and is standing at "+closestJ+":"+closestK);
+//System.out.println("The closest player is "+ closestName + " and is standing at "+closestJ+":"+closestK);
 return closestK;
 	}
 	
@@ -239,10 +239,10 @@ for(int x = 0; x < number_players; x = x+1) {
 			distanceK = distanceK + (2*(-1*distanceK));
 		}
 		int distance = distanceJ + distanceK;
-		System.out.println("Distance to "+currentplayer+ " is " + distanceJ+":"+distanceK);
+		//System.out.println("Distance to "+currentplayer+ " is " + distanceJ+":"+distanceK);
 		System.out.println(closest);
 		if(distance < closest) {
-			System.out.println(distance + " < " + closest);
+			//System.out.println(distance + " < " + closest);
 		closestJ = 	playerJ;
 		closestK = 	playerK;
 		closestName = currentplayer;
@@ -253,7 +253,7 @@ for(int x = 0; x < number_players; x = x+1) {
 	
 	
 }
-System.out.println("The closest player is "+ closestName + " and is standing at "+closestJ+":"+closestK);
+//System.out.println("The closest player is "+ closestName + " and is standing at "+closestJ+":"+closestK);
 return closestJ;
 	}
 	
@@ -288,7 +288,7 @@ for(int x = 0; x < number_players; x = x+1) {
 	 	String playersname = getPlayers(map);
 		String[] playerlist = playersname.split(",");
 		for(int x = 0; x < playerlist.length; x = x+1) {
-		System.out.println(playerlist[x]);
+		//System.out.println(playerlist[x]);
 		}
 		
 		
