@@ -128,11 +128,10 @@ public class Client {
 							kartet.CreateWalkableArray(kart);
 							
 							
-<<<<<<< HEAD
+
 							//System.out.println("Rounde " + runde + " is started");
-=======
+
 							System.out.println("Roun de " + runde + " is started");
->>>>>>> 48497be1d84261a947597d7d8c57ace8b44a8ca6
 							//Sjekke om det er min tur?
 							if(Players.isMe(map)) {
 								int posJ = Players.myPosJ(map);
@@ -171,7 +170,7 @@ public class Client {
 								
 								int goalj = Players.closestPlayerJ(map, posJ, posK);
 								int goalk = Players.closestPlayerK(map, posJ, posK);
-								String moves[] = movement.pathfinder(posJ, posK, goalj, goalk);
+								String moves[] = movement.path(posJ, posK, 10, 11, 0);
 								
 								for(int i = 0; i<3; i+=1){
 								
