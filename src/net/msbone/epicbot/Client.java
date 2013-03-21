@@ -127,10 +127,10 @@ public class Client {
 							Kartet kartet = new Kartet();
 							kartet.CreateWalkableArray(kart);
 							
-							
-
 							//System.out.println("Rounde " + runde + " is started");
 
+							System.out.println("Roun de " + runde + " is started");
+							//System.out.println("Rounde " + runde + " is started");
 							System.out.println("Roun de " + runde + " is started");
 							//Sjekke om det er min tur?
 							if(Players.isMe(map)) {
