@@ -128,11 +128,20 @@ public class Client {
 							kartet.CreateWalkableArray(kart);
 							
 <<<<<<< HEAD
+<<<<<<< HEAD
 							//System.out.println("Rounde " + runde + " is started");
 
 							System.out.println("Roun de " + runde + " is started");
 							//System.out.println("Rounde " + runde + " is started");
 							System.out.println("Roun de " + runde + " is started");
+=======
+							
+//<<<<<<< HEAD
+							//System.out.println("Rounde " + runde + " is started");
+//=======
+							System.out.println("Roun de " + runde + " is started");
+//>>>>>>> 48497be1d84261a947597d7d8c57ace8b44a8ca6
+>>>>>>> d2def86d0da20abbb3254b1d645c49f6bf72fd25
 =======
 							
 //<<<<<<< HEAD
