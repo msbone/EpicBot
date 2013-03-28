@@ -58,7 +58,16 @@ public class Weapon {
 	public static boolean InRange(int posJ, int posK, int enemyJ, int enemyK, String weapon, Object[][] kart){
 		//Do a check if player standing at posK/posJ can attack using weapon
 		
-		if(weapon.equals("laser")) {
+		if(weapon.equals("mortar")) {
+			//Shoot with Mortar
+			//Check if we are in range!
+			
+			
+			
+			
+		}
+		
+		else if(weapon.equals("laser")) {
 			//System.out.println("Laser");
 			
 			int topJ;

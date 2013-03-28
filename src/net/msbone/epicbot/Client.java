@@ -175,7 +175,7 @@ public class Client {
 								
 								int goalj = Players.closestPlayerJ(map, posJ, posK);
 								int goalk = Players.closestPlayerK(map, posJ, posK);
-								String moves[] = movement.path(posJ, posK, 10, 11, 0);
+								String moves[] = movement.path(posJ, posK, goalj, goalk, 0);
 								
 								for(int i = 0; i<3; i+=1){
 								
