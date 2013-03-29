@@ -139,8 +139,8 @@ public class Client {
 								//La oss sjekke om vi kan angripe nokke :)
 								
 								//Comented out to save some console place
-								System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "mortar", kart));
-								
+							System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "laser", kart));
+							System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "mortar", kart));	
 								
 								//System.out.println("Lets move!");
 								Random generator = new Random();

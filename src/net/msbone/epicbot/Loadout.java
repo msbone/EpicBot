@@ -112,7 +112,8 @@ public class Loadout{
 		connect.put("message", "loadout");
 		connect.put("primary-weapon", "laser");
 		//connect.put("primary-weapon", primary_weapon);
-		connect.put("secondary-weapon", secondary_weapon);
+		//connect.put("secondary-weapon", secondary_weapon);
+		connect.put("secondary-weapon", "mortar");
 		Gson gson = new Gson();
 		String json = gson.toJson(connect);
 		Client.sendMessage(json);
