@@ -54,7 +54,7 @@ public class Client {
 	}
 	
 	public static void sendMessage(String message) {
-		//System.out.println("Message sent to server: " + message);
+		System.out.println("Message sent to server: " + message);
 		try {
 			outToServer.writeBytes(message + '\n');
 			outToServer.flush();
@@ -139,7 +139,7 @@ public class Client {
 								//La oss sjekke om vi kan angripe nokke :)
 								
 								//Comented out to save some console place
-								System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "laser", kart));
+								System.out.println(Weapon.InRange(posJ, posK, Players.closestPlayerJ(map, posJ, posK), Players.closestPlayerK(map, posJ, posK), "mortar", kart));
 								
 								
 								//System.out.println("Lets move!");
@@ -168,10 +168,10 @@ public class Client {
 								System.out.println(Mining.closestMineRange("R", posJ, posK));
 								
 								
-								//int goalj = Players.closestPlayerJ(map, posJ, posK);
-								//int goalk = Players.closestPlayerK(map, posJ, posK);
-								int goalk = Mining.closestMineK("R", posJ, posK);
-								int goalj = Mining.closestMineJ("R", posJ, posK);
+								int goalj = Players.closestPlayerJ(map, posJ, posK);
+								int goalk = Players.closestPlayerK(map, posJ, posK);
+								//int goalk = Mining.closestMineK("R", posJ, posK);
+								//int goalj = Mining.closestMineJ("R", posJ, posK);
 								
 								
 								String moves[] = movement.path(posJ, posK, goalj, goalk, 0);
@@ -208,7 +208,7 @@ public class Client {
 					}
 					else {
 						//Unknown message!
-						//System.out.println("Ukjent data motatt fra server " + data);
+						System.out.println("Ukjent data motatt fra server " + data);
 					}
 					
 				}
