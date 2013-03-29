@@ -69,7 +69,7 @@ public class Movement {
 	
 	public int[][] entrance = new int[50][50];
 	
-	public boolean roundabout(int jr, int kr){
+	/*public boolean roundabout(int jr, int kr){
 		boolean returnVR = false;
 		
 		if(jr >= 0 && kr >= 0){
@@ -77,7 +77,7 @@ public class Movement {
 		}
 		
 		return returnVR;
-	}
+	}*/
 
 	public String[] path(int j1, int k1, int j2, int k2, int c3){
 		
@@ -127,7 +127,9 @@ public class Movement {
 		
 		while(c4 < 6){ //while the J or the K coordinates is not equal to the goal
 			//System.out.println("test_loop");
-			if((((c1 < J && c2 < K) && wrongC("down")) || (c4 > 2 && shortest((j1+1), (k1+1), j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout((j1+1), (k1+1))){
+			int jdown = j1+1;
+			int kdown = k1+1;
+			if((((c1 < J && c2 < K) && wrongC("down")) || (c4 > 2 && shortest(jdown, kdown, j2, k2, j1a, k1a))) && (moves[c3] == null)){
 				//System.out.println("down (" + (j1+1) + "," + (k1+1) + ")" + roundabout(j1+1, k1+1));
 				c1 += 1;
 				c2 += 1;
@@ -136,7 +138,7 @@ public class Movement {
 				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "down";
-						entrance[j1][k1] = 1;
+						//entrance[j1][k1] = 1;
 						//System.out.println("down walkable");
 						wrongI("");
 						//if(c4 > 3){wrongI("up");}
@@ -151,7 +153,9 @@ public class Movement {
 					}
 				
 			}
-			if((((c1 > J && c2 > K) && wrongC("up")) || (c4 > 2 && shortest((j1-1), (k1-1), j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout((j1-1), (k1-1))){
+			int jup = j1-1;
+			int kup = k1-1;
+			if((((c1 > J && c2 > K) && wrongC("up")) || (c4 > 2 && shortest(jup, kup, j2, k2, j1a, k1a))) && (moves[c3] == null)){
 				//System.out.println("up (" + (j1-1) + "," + (k1-1) + ")" + roundabout(j1-1, k1-1));
 				
 				c1 -= 1;
@@ -162,7 +166,7 @@ public class Movement {
 					if(walkable(j1, k1)){
 						//System.out.println("up walkable");
 						moves[c3] = "up";
-						entrance[j1][k1] = 1;
+						//entrance[j1][k1] = 1;
 						wrongI("");
 						//if(c4 > 3){wrongI("down");}
 						c3 += 1;
@@ -175,7 +179,9 @@ public class Movement {
 						k1 += 1;
 					}
 			}
-			if(((c1 < J && wrongC("left-down")) || (c4 > 2 && shortest((j1+1), k1, j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout((j1+1), k1)){
+			int jleftdown = j1+1;
+			int kleftdown = k1;
+			if(((c1 < J && wrongC("left-down")) || (c4 > 2 && shortest(jleftdown, kleftdown, j2, k2, j1a, k1a))) && (moves[c3] == null)){
 				//System.out.println("left-down (" + (j1+1) + "," + k1 + ")" + roundabout(j1+1, k1));
 				
 				c1 += 1;
@@ -183,7 +189,7 @@ public class Movement {
 				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "left-down";
-						entrance[j1][k1] = 1;
+						//entrance[j1][k1] = 1;
 						//System.out.println("left-down walkable");
 						wrongI("");
 						//if(c4 > 3){wrongI("right-up");}
@@ -195,7 +201,9 @@ public class Movement {
 						j1 -= 1;
 					}
 			}
-			if(((c2 < K && wrongC("right-down"))|| (c4 > 2 && shortest(j1, (k1+1), j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout(j1, (k1+1))){
+			int jrightdown = j1;
+			int krightdown = k1+1;
+			if(((c2 < K && wrongC("right-down"))|| (c4 > 2 && shortest(jrightdown, krightdown, j2, k2, j1a, k1a))) && (moves[c3] == null)){
 				//System.out.println("right-down (" + j1 + "," + (k1+1) + ")" + roundabout(j1, k1+1));
 				
 				c2 += 1;
@@ -203,7 +211,7 @@ public class Movement {
 				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "right-down";
-						entrance[j1][k1] = 1;
+						//entrance[j1][k1] = 1;
 						//System.out.println("right-down walkable");
 						wrongI("");
 						//if(c4 > 3){wrongI("left-up");}
@@ -215,7 +223,9 @@ public class Movement {
 						k1 -= 1;
 					}
 			}
-			if(((c1 > J && wrongC("right-up")) || (c4 > 2 && shortest((j1-1), k1, j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout((j1-1), k1)){
+			int jrightup = j1-1;
+			int krightup = k1;
+			if(((c1 > J && wrongC("right-up")) || (c4 > 2 && shortest(jrightup, krightup, j2, k2, j1a, k1a))) && (moves[c3] == null)){
 				//System.out.println("right-up (" + (j1-1) + "," + k1 + ")" + roundabout(j1-1, k1));
 				
 				c1 -= 1;
@@ -223,7 +233,7 @@ public class Movement {
 				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "right-up";
-						entrance[j1][k1] = 1;
+						//entrance[j1][k1] = 1;
 						//System.out.println("right-up walkable");
 						wrongI("");
 						//if(c4 > 3){wrongI("left-down");}
@@ -235,7 +245,9 @@ public class Movement {
 						j1 += 1;
 					}
 			}
-			if(((c2 > K && wrongC("left-up")) || (c4 > 2 && shortest(j1, (k1-1), j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout(j1, (k1-1))){
+			int jleftup = j1;
+			int kleftup = k1-1;
+			if(((c2 > K && wrongC("left-up")) || (c4 > 2 && shortest(jleftup, kleftup, j2, k2, j1a, k1a))) && (moves[c3] == null)){
 				//System.out.println("left-up (" + j1 + "," + (k1-1) + ")" + roundabout(j1, k1-1));
 				
 				c2 -= 1;
@@ -243,7 +255,7 @@ public class Movement {
 				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "left-up";
-						entrance[j1][k1] = 1;
+						//entrance[j1][k1] = 1;
 						//System.out.println("left-up walkable");
 						wrongI("");
 						//if(c4 > 3){wrongI("right-down");} //this is fucking up the program right now
