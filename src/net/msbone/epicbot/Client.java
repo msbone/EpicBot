@@ -128,15 +128,8 @@ public class Client {
 							kartet.CreateWalkableArray(kart);
 							
 							//System.out.println("Rounde " + runde + " is started");
-
-							System.out.println("Rounde " + runde + " is started");
-							//System.out.println("Rounde " + runde + " is started");
 							System.out.println("Rounde " + runde + " is started");
 							
-							//System.out.println("Rounde " + runde + " is started");
-							System.out.println("Rounde " + runde + " is started");
-							//System.out.println("Rounde " + runde + " is started");
-							System.out.println("Rounde " + runde + " is started");
 							//Sjekke om det er min tur?
 							if(Players.isMe(map)) {
 								int posJ = Players.myPosJ(map);
@@ -194,7 +187,11 @@ public class Client {
 								}
 								
 								
-								String move_echo = "moves: " + moves[0] + " " + moves[1] + " " + moves[2] + " " + moves[3] + " " + moves[4] + " " + moves[5];
+								String move_echo = "moves: ";
+								for(int imove = 0; imove < moves.length; imove+=1){
+								move_echo += moves[imove] + " ";
+								}
+								
 								System.out.println("our_pos: (" + posJ + "," + posK + ")");
 								System.out.println("goal: (" + goalj + "," + goalk + ")");
 								System.out.println(move_echo);
