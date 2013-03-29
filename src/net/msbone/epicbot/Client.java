@@ -172,9 +172,15 @@ public class Client {
 									Thread.sleep(10);
 								}
 								*/
+								System.out.println(Mining.closestMineRange("R", posJ, posK));
 								
-								int goalj = Players.closestPlayerJ(map, posJ, posK);
-								int goalk = Players.closestPlayerK(map, posJ, posK);
+								
+								//int goalj = Players.closestPlayerJ(map, posJ, posK);
+								//int goalk = Players.closestPlayerK(map, posJ, posK);
+								int goalk = Mining.closestMineK("R", posJ, posK);
+								int goalj = Mining.closestMineJ("R", posJ, posK);
+								
+								
 								String moves[] = movement.path(posJ, posK, goalj, goalk, 0);
 								
 								for(int i = 0; i<3; i+=1){
