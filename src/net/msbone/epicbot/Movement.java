@@ -12,146 +12,7 @@ public class Movement {
 	//Bot-right = K + 1
 	//Top-left = K - 1
 	//Bot-left = J + 1
-	
-	public boolean canMoveTop(boolean move, int posJ, int posK, Object kart[][]) {
-		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		//System.out.println("Will try to move TOP");
-		int blockInfrontJ = posJ + 1;
-		int blockInfrontK = posK + 1;
-		if(walkable(blockInfrontJ, blockInfrontK)) {
-			//Can move
-			if(move){
-				//Move!
-				Gson gson = new Gson();
-				Map<String, String> moveMessage = new HashMap<String, String>();
-				//System.out.println("Moving to " + kart[blockInfrontJ][blockInfrontK] + " at " + blockInfrontJ + ":" + blockInfrontK);
-				moveMessage.put("message", "action");
-				moveMessage.put("type", "move");
-				moveMessage.put("direction", "down");
-				String json = gson.toJson(moveMessage);
-				Client.sendMessage(json);
-			}
-			return true;
-		}
-		
-		return false;
-	}
-	public boolean canMoveBot(boolean move, int posJ, int posK, Object kart[][]) {
-		int blockInbackJ = posJ - 1;
-		int blockInbackK = posK - 1;
-		if(walkable(blockInbackJ, blockInbackK)) {
-			//Can move
-			if(move){
-				//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-				//System.out.println("Will try to move BOT");
-				//Move!
-				Gson gson = new Gson();
-				Map<String, String> moveMessage = new HashMap<String, String>();
-				//System.out.println("Moving to " + kart[blockInbackJ][blockInbackK] + " at " + blockInbackJ + ":" + blockInbackK);
-				moveMessage.put("message", "action");
-				moveMessage.put("type", "move");
-				moveMessage.put("direction", "up");
-				String json = gson.toJson(moveMessage);
-				Client.sendMessage(json);
-			}
-			return true;
-		}
-		
-		return false;
-	}
-	public boolean canMoveLeftTop(boolean move, int posJ, int posK, Object kart[][]) {
-		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		//System.out.println("Will try to move LEFT TOP");
-		int blockInleftTopK = posK - 1;
-		int blockInleftTopJ = posJ;
-		if(walkable(blockInleftTopJ, blockInleftTopK)) {
-			//Can move
-			if(move){
-				//Move!
-				Gson gson = new Gson();
-				Map<String, String> moveMessage = new HashMap<String, String>();
-				//System.out.println("Moving to " + kart[blockInleftTopJ][blockInleftTopK] + " at " + blockInleftTopJ + ":" + blockInleftTopK);
-				moveMessage.put("message", "action");
-				moveMessage.put("type", "move");
-				moveMessage.put("direction", "left-down");
-				String json = gson.toJson(moveMessage);
-				Client.sendMessage(json);
-			}
-			return true;
-		}
-		
-		return false;
-	}
-	public boolean canMoveLeftBot(boolean move, int posJ, int posK, Object kart[][]) {
-		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		//System.out.println("Will try to move LEFT BOT");
-		int blockInleftBotK = posK + 1;
-		int blockInleftBotJ = posJ;
-		if(walkable(blockInleftBotJ, blockInleftBotK)) {
-			//Can move
-			if(move){
-				//Move!
-				Gson gson = new Gson();
-				Map<String, String> moveMessage = new HashMap<String, String>();
-				//System.out.println("Moving to " + kart[blockInleftBotJ][blockInleftBotK] + " at " + blockInleftBotJ + ":" + blockInleftBotK);
-				moveMessage.put("message", "action");
-				moveMessage.put("type", "move");
-				moveMessage.put("direction", "left-up");
-				String json = gson.toJson(moveMessage);
-				Client.sendMessage(json);
-			}
-			return true;
-		}
-		
-		return false;
-	}
-	public boolean canMoveRightTop(boolean move, int posJ, int posK, Object kart[][]) {
-		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		//System.out.println("Will try to move RIGHT TOP");
-		int blockInrightTopK = posK;
-		int blockInrightTopJ = posJ - 1;
-		if(walkable(blockInrightTopJ, blockInrightTopK)) {
-			//Can move
-			if(move){
-				//Move!
-				Gson gson = new Gson();
-				Map<String, String> moveMessage = new HashMap<String, String>();
-				//System.out.println("Moving to " + kart[blockInrightTopJ][blockInrightTopK] + " at " + blockInrightTopJ + ":" + blockInrightTopK);
-				moveMessage.put("message", "action");
-				moveMessage.put("type", "move");
-				moveMessage.put("direction", "right-down");
-				String json = gson.toJson(moveMessage);
-				Client.sendMessage(json);
-			}
-			return true;
-		}
-		
-		return false;
-	}
-	public boolean canMoveRightBot(boolean move, int posJ, int posK, Object kart[][]) {
-		//System.out.println("The player is standing on " + kart[posJ][posK] + " at " + posJ + ":" + posK);
-		//System.out.println("Will try to move RIGHT BOT");
-		int blockInrightBotK = posK + 1;
-		int blockInrightBotJ = posJ;
-		if(walkable(blockInrightBotJ, blockInrightBotK)) {
-			//Can move
-			if(move){
-				//Move!
-				Gson gson = new Gson();
-				Map<String, String> moveMessage = new HashMap<String, String>();
-				//System.out.println("Moving to " + kart[blockInrightBotJ][blockInrightBotK] + " at " + blockInrightBotJ + ":" + blockInrightBotK);
-				moveMessage.put("message", "action");
-				moveMessage.put("type", "move");
-				moveMessage.put("direction", "right-up");
-				String json = gson.toJson(moveMessage);
-				Client.sendMessage(json);
-			}
-			return true;
-		}
-		
-		return false;
-	}
-	
+
 	public boolean walkable(int j, int k){
 		Object[][] kart = Kartet.kart;
 		int aSize = kart[0].length;
@@ -205,8 +66,26 @@ public class Movement {
 			}
 		}
 	}
+	
+	public int[][] entrance = new int[50][50];
+	
+	public boolean roundabout(int jr, int kr){
+		boolean returnVR = false;
+		
+		if(jr >= 0 && kr >= 0){
+			if(entrance[jr][kr] == 0){returnVR = true;}
+		}
+		
+		return returnVR;
+	}
 
 	public String[] path(int j1, int k1, int j2, int k2, int c3){
+		
+		/*for(int jshit = 0; jshit < 50; jshit += 1){
+			for(int kshit = 0; kshit < 50; kshit += 1){
+				System.out.println(entrance[jshit][kshit]);
+			}
+		}*/
 		
 		int j1a = j1; //does not change in this function.
 		int k1a = k1; //does not change in this function.
@@ -248,24 +127,19 @@ public class Movement {
 		
 		while(c4 < 6){ //while the J or the K coordinates is not equal to the goal
 			//System.out.println("test_loop");
-			if((((c1 < J && c2 < K) && wrongC("down")) || (c4 > 2 && shortest((j1+1), (k1+1), j2, k2, j1a, k1a))) && (moves[c3] == null)){
-				System.out.println("down");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println(j1 + "," + k1);
+			if((((c1 < J && c2 < K) && wrongC("down")) || (c4 > 2 && shortest((j1+1), (k1+1), j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout((j1+1), (k1+1))){
+				//System.out.println("down (" + (j1+1) + "," + (k1+1) + ")" + roundabout(j1+1, k1+1));
 				c1 += 1;
 				c2 += 1;
 				j1 += 1;
 				k1 += 1;
-				System.out.println(j1 + "," + k1);
+				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "down";
-						System.out.println("down walkable");
+						entrance[j1][k1] = 1;
+						//System.out.println("down walkable");
 						wrongI("");
-						if(c4 > 3){wrongI("up");}
+						//if(c4 > 3){wrongI("up");}
 						c3 += 1;
 					}
 					else{
@@ -277,24 +151,20 @@ public class Movement {
 					}
 				
 			}
-			if((((c1 > J && c2 > K) && wrongC("up")) || (c4 > 2 && shortest((j1-1), (k1-1), j2, k2, j1a, k1a))) && (moves[c3] == null)){
-				System.out.println("up");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
+			if((((c1 > J && c2 > K) && wrongC("up")) || (c4 > 2 && shortest((j1-1), (k1-1), j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout((j1-1), (k1-1))){
+				//System.out.println("up (" + (j1-1) + "," + (k1-1) + ")" + roundabout(j1-1, k1-1));
 				
 				c1 -= 1;
 				c2 -= 1;
 				j1 -= 1;
 				k1 -= 1;
-				System.out.println(j1 + "," + k1);
+				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
-						System.out.println("up walkable");
+						//System.out.println("up walkable");
 						moves[c3] = "up";
+						entrance[j1][k1] = 1;
 						wrongI("");
-						if(c4 > 3){wrongI("down");}
+						//if(c4 > 3){wrongI("down");}
 						c3 += 1;
 					}
 					else{
@@ -305,22 +175,18 @@ public class Movement {
 						k1 += 1;
 					}
 			}
-			if(((c1 < J && wrongC("left-down")) || (c4 > 2 && shortest((j1+1), k1, j2, k2, j1a, k1a))) && (moves[c3] == null)){
-				System.out.println("left-down");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
+			if(((c1 < J && wrongC("left-down")) || (c4 > 2 && shortest((j1+1), k1, j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout((j1+1), k1)){
+				//System.out.println("left-down (" + (j1+1) + "," + k1 + ")" + roundabout(j1+1, k1));
 				
 				c1 += 1;
 				j1 += 1;
-				System.out.println(j1 + "," + k1);
+				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "left-down";
-						System.out.println("left-down walkable");
+						entrance[j1][k1] = 1;
+						//System.out.println("left-down walkable");
 						wrongI("");
-						if(c4 > 3){wrongI("right-up");}
+						//if(c4 > 3){wrongI("right-up");}
 						c3 += 1;
 					}
 					else{
@@ -329,22 +195,18 @@ public class Movement {
 						j1 -= 1;
 					}
 			}
-			if(((c2 < K && wrongC("right-down"))|| (c4 > 2 && shortest(j1, (k1+1), j2, k2, j1a, k1a))) && (moves[c3] == null)){
-				System.out.println("right-down");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
+			if(((c2 < K && wrongC("right-down"))|| (c4 > 2 && shortest(j1, (k1+1), j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout(j1, (k1+1))){
+				//System.out.println("right-down (" + j1 + "," + (k1+1) + ")" + roundabout(j1, k1+1));
 				
 				c2 += 1;
 				k1 += 1;
-				System.out.println(j1 + "," + k1);
+				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "right-down";
-						System.out.println("right-down walkable");
+						entrance[j1][k1] = 1;
+						//System.out.println("right-down walkable");
 						wrongI("");
-						if(c4 > 3){wrongI("left-up");}
+						//if(c4 > 3){wrongI("left-up");}
 						c3 += 1;
 					}
 					else{
@@ -353,22 +215,18 @@ public class Movement {
 						k1 -= 1;
 					}
 			}
-			if(((c1 > J && wrongC("right-up")) || (c4 > 2 && shortest((j1-1), k1, j2, k2, j1a, k1a))) && (moves[c3] == null)){
-				System.out.println("right-up");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
+			if(((c1 > J && wrongC("right-up")) || (c4 > 2 && shortest((j1-1), k1, j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout((j1-1), k1)){
+				//System.out.println("right-up (" + (j1-1) + "," + k1 + ")" + roundabout(j1-1, k1));
 				
 				c1 -= 1;
 				j1 -= 1;
-				System.out.println(j1 + "," + k1);
+				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "right-up";
-						System.out.println("right-up walkable");
+						entrance[j1][k1] = 1;
+						//System.out.println("right-up walkable");
 						wrongI("");
-						if(c4 > 3){wrongI("left-down");}
+						//if(c4 > 3){wrongI("left-down");}
 						c3 += 1;
 					}
 					else{
@@ -377,22 +235,18 @@ public class Movement {
 						j1 += 1;
 					}
 			}
-			if(((c2 > K && wrongC("left-up")) || (c4 > 2 && shortest(j1, (k1-1), j2, k2, j1a, k1a))) && (moves[c3] == null)){
-				System.out.println("left-up");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
-				System.out.println("it validates!");
+			if(((c2 > K && wrongC("left-up")) || (c4 > 2 && shortest(j1, (k1-1), j2, k2, j1a, k1a))) && (moves[c3] == null) && roundabout(j1, (k1-1))){
+				//System.out.println("left-up (" + j1 + "," + (k1-1) + ")" + roundabout(j1, k1-1));
 				
 				c2 -= 1;
 				k1 -= 1;
-				System.out.println(j1 + "," + k1);
+				//System.out.println(j1 + "," + k1);
 					if(walkable(j1, k1)){
 						moves[c3] = "left-up";
-						System.out.println("left-up walkable");
+						entrance[j1][k1] = 1;
+						//System.out.println("left-up walkable");
 						wrongI("");
-						if(c4 > 3){wrongI("right-down");} //this is fucking up the program right now
+						//if(c4 > 3){wrongI("right-down");} //this is fucking up the program right now
 						c3 += 1;
 					}
 					else{
@@ -426,7 +280,8 @@ public class Movement {
 		if(kd < 0){kd = kd*(-1);}
 		int down = jd+kd;
 		if(down < 0){down = down*(-1);}
-		if(walkable((j1a+1), (k1a+1)) && wrongC("down")){lowest = down; System.out.println("lowest = down");}
+		if(walkable((j1a+1), (k1a+1)) && wrongC("down")){lowest = down; //System.out.println("lowest = down");
+		}
 		
 		j1t = j1a-1;
 		k1t = k1a-1;
@@ -436,7 +291,8 @@ public class Movement {
 		if(kd < 0){kd = kd*(-1);}
 		int up = jd+kd;
 		if(up < 0){up = up*(-1);}
-		if(up < lowest && walkable((j1a-1), (k1a-1)) && wrongC("up")){lowest = up; System.out.println("lowest = up");}
+		if(up < lowest && walkable((j1a-1), (k1a-1)) && wrongC("up")){lowest = up; //System.out.println("lowest = up");
+		}
 		
 		j1t = j1a+1;
 		k1t = k1a;
@@ -446,7 +302,8 @@ public class Movement {
 		if(kd < 0){kd = kd*(-1);}
 		int leftDown = jd+kd;
 		if(leftDown < 0){leftDown = leftDown*(-1);}
-		if(leftDown < lowest && walkable((j1a+1), (k1a)) && wrongC("left-down")){lowest = leftDown; System.out.println("lowest = leftDown");}
+		if(leftDown < lowest && walkable((j1a+1), (k1a)) && wrongC("left-down")){lowest = leftDown; //System.out.println("lowest = leftDown");
+		}
 		
 		j1t = j1;
 		k1t = k1a+1;
@@ -456,7 +313,8 @@ public class Movement {
 		if(kd < 0){kd = kd*(-1);}
 		int rightDown = jd+kd;
 		if(rightDown < 0){rightDown = rightDown*(-1);}
-		if(rightDown < lowest && walkable((j1a), (k1a+1)) && wrongC("right-down")){lowest = rightDown; System.out.println("lowest = rightDown");}
+		if(rightDown < lowest && walkable((j1a), (k1a+1)) && wrongC("right-down")){lowest = rightDown; //System.out.println("lowest = rightDown");
+		}
 		
 		j1t = j1a-1;
 		k1t = k1a;
@@ -466,7 +324,8 @@ public class Movement {
 		if(kd < 0){kd = kd*(-1);}
 		int rightUp = jd+kd;
 		if(rightUp < 0){rightUp = rightUp*(-1);}
-		if(rightUp < lowest && walkable((j1a-1), (k1a)) && wrongC("right-up")){lowest = rightUp; System.out.println("lowest = rightUp");}
+		if(rightUp < lowest && walkable((j1a-1), (k1a)) && wrongC("right-up")){lowest = rightUp; //System.out.println("lowest = rightUp");
+		}
 		
 		j1t = j1a;
 		k1t = k1a-1;
@@ -476,7 +335,8 @@ public class Movement {
 		if(kd < 0){kd = kd*(-1);}
 		int leftUp = jd+kd;
 		if(leftUp < 0){leftUp = leftUp*(-1);}
-		if(leftUp < lowest && walkable((j1a), (k1a-1)) && wrongC("left-up")){lowest = leftUp; System.out.println("lowest = leftUp");}
+		if(leftUp < lowest && walkable((j1a), (k1a-1)) && wrongC("left-up")){lowest = leftUp; //System.out.println("lowest = leftUp");
+		}
 		
 		jd = j2-j1;
 		kd = k2-k1;
@@ -490,5 +350,4 @@ public class Movement {
 		}	
 		return returnV;
 	}
-
 }
